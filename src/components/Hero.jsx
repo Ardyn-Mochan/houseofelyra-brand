@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     const { scrollY } = useScroll();
@@ -92,49 +93,51 @@ const Hero = () => {
                     YOUR AURA, PERFECTED.
                 </motion.h1>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.6, delay: 1.0, ease: [0.19, 1, 0.22, 1] }}
-                    className="flex items-center gap-3 group cursor-pointer"
-                >
-                    <p
-                        className="text-sm md:text-base font-light"
-                        style={{
-                            color: '#ffffff',
-                            fontWeight: 200,
-                            letterSpacing: '0.03em',
-                            textShadow: `
-                                0 0 20px rgba(255, 255, 255, 0.6),
-                                0 0 40px rgba(255, 255, 255, 0.3)
-                            `
-                        }}
+                <Link to="/shop">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.6, delay: 1.0, ease: [0.19, 1, 0.22, 1] }}
+                        className="flex items-center gap-3 group cursor-pointer"
                     >
-                        Discover your soul's signature.
-                    </p>
-                    <motion.svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        className="transform group-hover:translate-x-1 transition-transform duration-700 ease-out"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1.4, delay: 1.4, ease: [0.19, 1, 0.22, 1] }}
-                        style={{
-                            color: '#ffffff',
-                            filter: `
-                                drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
-                                drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
-                                drop-shadow(0 0 15px rgba(255, 255, 255, 0.5))
-                            `
-                        }}
-                    >
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </motion.svg>
-                </motion.div>
+                        <p
+                            className="text-sm md:text-base font-light"
+                            style={{
+                                color: '#ffffff',
+                                fontWeight: 200,
+                                letterSpacing: '0.03em',
+                                textShadow: `
+                                    0 0 20px rgba(255, 255, 255, 0.6),
+                                    0 0 40px rgba(255, 255, 255, 0.3)
+                                `
+                            }}
+                        >
+                            Discover your soul's signature.
+                        </p>
+                        <motion.svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            className="transform group-hover:translate-x-1 transition-transform duration-700 ease-out"
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1.4, delay: 1.4, ease: [0.19, 1, 0.22, 1] }}
+                            style={{
+                                color: '#ffffff',
+                                filter: `
+                                    drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
+                                    drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
+                                    drop-shadow(0 0 15px rgba(255, 255, 255, 0.5))
+                                `
+                            }}
+                        >
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </motion.svg>
+                    </motion.div>
+                </Link>
             </motion.div>
         </section>
     );
