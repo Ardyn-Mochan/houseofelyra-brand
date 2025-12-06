@@ -2,6 +2,8 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { loadStripe } from '@stripe/stripe-js';
+import { STRIPE_PUBLISHABLE_KEY } from '../config/stripe';
 
 const Cart = () => {
     const {
@@ -13,6 +15,54 @@ const Cart = () => {
         getCartTotal,
         getCartItemsCount
     } = useCart();
+
+    const handleCheckout = async () => {
+        const stripe = await loadStripe(STRIPE_PUBLISHABLE_KEY);
+
+        // TODO: Replace with your actual backend endpoint to create a checkout session
+        // This is a placeholder structure
+        try {
+            const response = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    items: cartItems.map(item => ({
+                        id: item.id,
+                        quantity: item.quantity,
+                        // Note: Passing price from client is insecure for production validation
+                        price: typeof item.price === 'string' ? parseFloat(item.price.replace('$', '')) : item.price,
+                        name: item.name
+                    })),
+                }),
+            });
+
+            if (!response.ok) {
+                // If 404, it means the backend route doesn't exist yet
+                if (response.status === 404) {
+                    alert("Checkout backend not connected yet. Refer to documentation to set up '/api/create-checkout-session'.");
+                    return;
+                }
+                throw new Error('Network response was not ok');
+            }
+
+            const session = await response.json();
+
+            // Redirect to Stripe Checkout
+            const result = await stripe.redirectToCheckout({
+                sessionId: session.id,
+            });
+
+            if (result.error) {
+                console.error(result.error.message);
+                alert(result.error.message);
+            }
+        } catch (error) {
+            console.error("Error during checkout:", error);
+            alert("Unable to initiate checkout. Please ensure backend is running.");
+        }
+    };
 
     return (
         <AnimatePresence>
@@ -149,7 +199,10 @@ const Cart = () => {
                                 </div>
 
                                 {/* Checkout Button */}
-                                <button className="w-full py-4 bg-elyra-soft-gold text-[#1a1816] font-medium uppercase tracking-[0.2em] text-sm hover:bg-elyra-soft-gold/90 transition-colors">
+                                <button
+                                    onClick={handleCheckout}
+                                    className="w-full py-4 bg-elyra-soft-gold text-[#1a1816] font-medium uppercase tracking-[0.2em] text-sm hover:bg-elyra-soft-gold/90 transition-colors"
+                                >
                                     Proceed to Checkout
                                 </button>
 
