@@ -42,12 +42,20 @@ const Cart = () => {
             });
 
             if (!response.ok) {
-                // If 404, it means the backend route doesn't exist yet
-                if (response.status === 404) {
-                    alert("Checkout backend not connected yet. Refer to documentation to set up '/api/create-checkout-session'.");
-                    return;
+                let errorMessage = 'Network response was not ok';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.message || errorMessage;
+                } catch (e) {
+                    // Could not parse JSON, fallback to status text or default
+                    errorMessage = response.statusText || errorMessage;
                 }
-                throw new Error('Network response was not ok');
+
+                if (response.status === 404) {
+                    errorMessage = "Checkout backend endpoint not found (/api/create-checkout-session).";
+                }
+
+                throw new Error(errorMessage);
             }
 
             const session = await response.json();

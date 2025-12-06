@@ -4,8 +4,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
+        if (!process.env.STRIPE_SECRET_KEY) {
+            return res.status(500).json({ message: 'Internal Server Error: Missing Stripe Secret Key.' });
+        }
+
         try {
             const { items } = req.body;
+
+            if (!items || !Array.isArray(items) || items.length === 0) {
+                return res.status(400).json({ message: 'No items provided for checkout.' });
+            }
 
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
@@ -15,10 +23,7 @@ export default async function handler(req, res) {
                         currency: 'usd',
                         product_data: {
                             name: item.name,
-                            // You can add images here if available in your item object
-                            // images: [item.image], 
                         },
-                        // Amount in cents
                         unit_amount: Math.round(item.price * 100),
                     },
                     quantity: item.quantity,
@@ -30,7 +35,7 @@ export default async function handler(req, res) {
 
             res.status(200).json({ id: session.id });
         } catch (err) {
-            console.error(err);
+            console.error("Stripe Error:", err);
             res.status(err.statusCode || 500).json({ message: err.message });
         }
     } else {
