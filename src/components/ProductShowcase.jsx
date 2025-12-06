@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const products = [
@@ -470,6 +471,7 @@ const ProductShowcase = () => {
     const scrollContainerRef = useRef(null);
     const [scrollDirection, setScrollDirection] = useState(null);
     const { addToCart } = useCart();
+    const navigate = useNavigate();
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -579,7 +581,8 @@ const ProductShowcase = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: (index % products.length) * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                                className={`group relative w-[300px] md:w-[380px] h-[520px] bg-elyra-ivory border border-elyra-taupe/20 flex flex-col justify-end overflow-hidden transition-all duration-700 hover:border-elyra-soft-gold/40 hover:shadow-[0_0_40px_rgba(212,196,168,0.15)] hover:backdrop-blur-sm ${product.image ? 'p-6' : 'p-8'}`}
+                                onClick={() => navigate(`/product/${product.name.toLowerCase().replace(/ /g, '-')}`)}
+                                className={`group relative w-[300px] md:w-[380px] h-[520px] bg-elyra-ivory border border-elyra-taupe/20 flex flex-col justify-end overflow-hidden transition-all duration-700 hover:border-elyra-soft-gold/40 hover:shadow-[0_0_40px_rgba(212,196,168,0.15)] hover:backdrop-blur-sm cursor-pointer ${product.image ? 'p-6' : 'p-8'}`}
                             >
                                 {/* Product Image (if exists) */}
                                 {product.image ? (
@@ -619,7 +622,7 @@ const ProductShowcase = () => {
 
                                         {/* Shopping Bag Icon with Price */}
                                         <button
-                                            onClick={() => addToCart(product)}
+                                            onClick={(e) => { e.stopPropagation(); addToCart(product); }}
                                             className="flex flex-col items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-500 hover:scale-110 flex-shrink-0"
                                         >
                                             <svg
