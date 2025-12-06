@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
                     <Link to="/blog" className="relative group text-white/90 hover:text-white transition-colors duration-300">
                         Journal
                     </Link>
-                    <a href="https://preview--aura-serenity-flow.lovable.app/" target="_blank" rel="noopener noreferrer" className="relative group text-white/90 hover:text-white transition-colors duration-300">
+                    <a href="https://wellness.houseofelyra.com/" target="_blank" rel="noopener noreferrer" className="relative group text-white/90 hover:text-white transition-colors duration-300">
                         Elyra
                     </a>
                 </nav>
@@ -157,7 +157,7 @@ const Layout = ({ children }) => {
                             <Link to="/blog" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Journal
                             </Link>
-                            <a href="https://preview--aura-serenity-flow.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <a href="https://wellness.houseofelyra.com/" target="_blank" rel="noopener noreferrer" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Elyra
                             </a>
                         </nav>
