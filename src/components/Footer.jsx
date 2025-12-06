@@ -51,7 +51,7 @@ const Footer = () => {
                             <li><a href="mailto:houseofelyra@gmail.com" className="hover:text-elyra-soft-gold transition-colors duration-300">Contact Us</a></li>
                             <li><a href="#" className="hover:text-elyra-soft-gold transition-colors duration-300">Shipping & Returns</a></li>
                             <li><a href="#" className="hover:text-elyra-soft-gold transition-colors duration-300">FAQ</a></li>
-                            <li><a href="#" className="hover:text-elyra-soft-gold transition-colors duration-300">Store Locator</a></li>
+
                         </ul>
                     </div>
 
