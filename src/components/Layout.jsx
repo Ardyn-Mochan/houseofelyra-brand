@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Footer from './Footer';
 import Cart from './Cart';
@@ -7,11 +7,32 @@ import { useCart } from '../context/CartContext';
 import Lenis from 'lenis';
 
 const Layout = ({ children }) => {
-    const { setIsCartOpen, getCartItemsCount } = useCart();
+    const [searchParams] = useSearchParams();
+    const { setIsCartOpen, getCartItemsCount, clearCart } = useCart();
     const cartCount = getCartItemsCount();
     const { pathname } = useLocation();
     const lenisRef = useRef(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+    useEffect(() => {
+        if (searchParams.get('success')) {
+            clearCart();
+            setShowSuccessMessage(true);
+            // Clean URL
+            window.history.replaceState({}, '', window.location.pathname);
+
+            // Auto hide after 5 seconds
+            const timer = setTimeout(() => setShowSuccessMessage(false), 5000);
+            return () => clearTimeout(timer);
+        }
+
+        if (searchParams.get('canceled')) {
+            // Optional: handle cancel state
+            // Clean URL
+            window.history.replaceState({}, '', window.location.pathname);
+        }
+    }, [searchParams, clearCart]);
 
     useEffect(() => {
         const lenis = new Lenis({
@@ -48,6 +69,7 @@ const Layout = ({ children }) => {
             window.scrollTo(0, 0);
         }
         setIsMobileMenuOpen(false); // Close mobile menu on route change
+        // Close success message on route change if wanted, but timeout handles it mostly
     }, [pathname]);
 
     return (
@@ -161,6 +183,36 @@ const Layout = ({ children }) => {
                                 Elyra
                             </a>
                         </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Success Message Toast */}
+            <AnimatePresence>
+                {showSuccessMessage && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -50, x: '-50%' }}
+                        animate={{ opacity: 1, y: 0, x: '-50%' }}
+                        exit={{ opacity: 0, y: -50, x: '-50%' }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        className="fixed top-28 left-1/2 z-[60] bg-elyra-soft-gold text-[#1a1816] px-6 py-4 rounded-sm shadow-2xl flex items-center gap-4 min-w-[300px]"
+                    >
+                        <div className="bg-black/10 p-2 rounded-full">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div className="flex-1">
+                            <h4 className="font-cinzel font-bold text-sm tracking-wider uppercase">Order Confirmed</h4>
+                            <p className="text-xs font-medium opacity-80">Thank you for your purchase.</p>
+                        </div>
+                        <button onClick={() => setShowSuccessMessage(false)} className="ml-2 hover:bg-black/10 p-1 rounded-full transition-colors">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
                     </motion.div>
                 )}
             </AnimatePresence>
