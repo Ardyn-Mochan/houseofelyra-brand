@@ -49,8 +49,8 @@ const Shop = () => {
                     <button
                         onClick={() => navigate('/shop')}
                         className={`px-4 py-2 text-xs uppercase tracking-[0.15em] transition-all duration-300 ${!category
-                                ? 'text-elyra-soft-gold border-b border-elyra-soft-gold'
-                                : 'text-elyra-cream/60 hover:text-elyra-cream'
+                            ? 'text-elyra-soft-gold border-b border-elyra-soft-gold'
+                            : 'text-elyra-cream/60 hover:text-elyra-cream'
                             }`}
                     >
                         All
@@ -60,8 +60,8 @@ const Shop = () => {
                             key={family.id}
                             onClick={() => navigate(`/shop/${family.id}`)}
                             className={`px-4 py-2 text-xs uppercase tracking-[0.15em] transition-all duration-300 ${category === family.id
-                                    ? 'text-elyra-soft-gold border-b border-elyra-soft-gold'
-                                    : 'text-elyra-cream/60 hover:text-elyra-cream'
+                                ? 'text-elyra-soft-gold border-b border-elyra-soft-gold'
+                                : 'text-elyra-cream/60 hover:text-elyra-cream'
                                 }`}
                         >
                             {family.name}
@@ -77,7 +77,7 @@ const Shop = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.05, duration: 0.6 }}
-                            className="group flex flex-col"
+                            className="group flex flex-col h-full"
                         >
                             {/* Image Container */}
                             <Link to={`/product/${product.slug}`} className="relative aspect-[4/5] overflow-hidden bg-elyra-earth/20 mb-6 border border-white/5 block">
@@ -100,7 +100,7 @@ const Shop = () => {
                             </Link>
 
                             {/* Product Details */}
-                            <div className="flex flex-col items-center text-center space-y-2">
+                            <div className="flex flex-col items-center text-center space-y-2 flex-grow w-full">
                                 <Link to={`/product/${product.slug}`}>
                                     <h3 className="font-cinzel text-xl text-elyra-cream tracking-wide group-hover:text-elyra-soft-gold transition-colors duration-300">
                                         {product.name}
@@ -119,7 +119,7 @@ const Shop = () => {
                                 </div>
 
                                 {/* Mobile Add to Cart (Always visible on mobile, hidden on desktop if using hover effect) */}
-                                <button onClick={() => addToCart(product)} className="md:hidden w-full mt-4 py-3 border border-white/20 text-elyra-cream text-xs uppercase tracking-[0.2em]">
+                                <button onClick={() => addToCart(product)} className="md:hidden w-full mt-auto py-3 border border-white/20 text-elyra-cream text-xs uppercase tracking-[0.2em]">
                                     Add to Cart
                                 </button>
                             </div>
