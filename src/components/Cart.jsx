@@ -55,7 +55,7 @@ const Cart = () => {
                     errorMessage = "Checkout backend endpoint not found (/api/create-checkout-session).";
                 }
 
-                throw new Error(errorMessage);
+                throw new Error(`[${response.status}] ${errorMessage}`);
             }
 
             const session = await response.json();
