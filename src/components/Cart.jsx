@@ -63,7 +63,7 @@ const Cart = () => {
             }
         } catch (error) {
             console.error("Error during checkout:", error);
-            alert("Unable to initiate checkout. Please ensure backend is running.");
+            alert(`Checkout Failed: ${error.message} (See console for details)`);
         } finally {
             setIsCheckingOut(false);
         }
