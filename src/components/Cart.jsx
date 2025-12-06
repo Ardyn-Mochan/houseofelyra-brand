@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -16,12 +16,15 @@ const Cart = () => {
         getCartItemsCount
     } = useCart();
 
-    const handleCheckout = async () => {
-        const stripe = await loadStripe(STRIPE_PUBLISHABLE_KEY);
+    const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-        // TODO: Replace with your actual backend endpoint to create a checkout session
-        // This is a placeholder structure
+    const handleCheckout = async () => {
+        setIsCheckingOut(true);
         try {
+            const stripe = await loadStripe(STRIPE_PUBLISHABLE_KEY);
+
+            // TODO: Replace with your actual backend endpoint to create a checkout session
+            // This is a placeholder structure
             const response = await fetch('/api/create-checkout-session', {
                 method: 'POST',
                 headers: {
@@ -61,6 +64,8 @@ const Cart = () => {
         } catch (error) {
             console.error("Error during checkout:", error);
             alert("Unable to initiate checkout. Please ensure backend is running.");
+        } finally {
+            setIsCheckingOut(false);
         }
     };
 
@@ -201,9 +206,17 @@ const Cart = () => {
                                 {/* Checkout Button */}
                                 <button
                                     onClick={handleCheckout}
-                                    className="w-full py-4 bg-elyra-soft-gold text-[#1a1816] font-medium uppercase tracking-[0.2em] text-sm hover:bg-elyra-soft-gold/90 transition-colors"
+                                    disabled={isCheckingOut}
+                                    className="w-full py-4 bg-elyra-soft-gold text-[#1a1816] font-medium uppercase tracking-[0.2em] text-sm hover:bg-elyra-soft-gold/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
                                 >
-                                    Proceed to Checkout
+                                    {isCheckingOut ? (
+                                        <>
+                                            <span className="w-4 h-4 border-2 border-[#1a1816]/30 border-t-[#1a1816] rounded-full animate-spin"></span>
+                                            Processing...
+                                        </>
+                                    ) : (
+                                        'Proceed to Checkout'
+                                    )}
                                 </button>
 
                                 {/* Continue Shopping */}
