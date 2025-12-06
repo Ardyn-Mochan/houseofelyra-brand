@@ -92,7 +92,7 @@ const Cart = () => {
                                                     {item.description}
                                                 </p>
                                                 <p className="text-elyra-cream/40 text-xs uppercase tracking-wider mb-3">
-                                                    {item.scent?.replace('Scent Family: ', '')}
+                                                    {item.scentFamily}
                                                 </p>
 
                                                 <div className="flex items-center justify-between mt-auto">
@@ -118,7 +118,7 @@ const Cart = () => {
                                                     {/* Price */}
                                                     <div className="text-right">
                                                         <p className="text-elyra-cream font-medium">
-                                                            ${(parseFloat(item.price.replace('$', '')) * item.quantity).toFixed(2)}
+                                                            ${((typeof item.price === 'string' ? parseFloat(item.price.replace('$', '')) : item.price) * item.quantity).toFixed(2)}
                                                         </p>
                                                         <button
                                                             onClick={() => removeFromCart(item.id)}
