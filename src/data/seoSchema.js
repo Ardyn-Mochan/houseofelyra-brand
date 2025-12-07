@@ -118,7 +118,7 @@ export const getFullSchema = () => {
                     "https://www.pinterest.com/houseofelyra"
                 ],
                 "description": "House of Elyra is a premium perfume house offering designer-inspired and niche-style fragrances. We craft long-lasting perfumes in woody, amber, fresh, floral, oriental, citrus and aromatic scent families for men, women, and unisex wear. Affordable luxury perfumes under $80.",
-                "foundingDate": "2024",
+                "foundingDate": "2025",
                 "address": {
                     "@type": "PostalAddress",
                     "addressCountry": "CA",

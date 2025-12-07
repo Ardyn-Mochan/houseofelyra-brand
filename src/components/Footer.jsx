@@ -76,7 +76,7 @@ const Footer = () => {
 
                 {/* Bottom Bar */}
                 <div className="pt-10 border-t border-elyra-taupe/20 flex flex-col md:flex-row justify-between items-center text-xs text-elyra-earth/60 uppercase tracking-[0.15em]">
-                    <p>© 2024 House of Elyra. All rights reserved.</p>
+                    <p>© 2025 House of Elyra. All rights reserved.</p>
                     <div className="flex space-x-8 mt-6 md:mt-0">
                         <a href="#" className="hover:text-elyra-earth transition-colors duration-300">Privacy Policy</a>
                         <a href="#" className="hover:text-elyra-earth transition-colors duration-300">Terms of Service</a>

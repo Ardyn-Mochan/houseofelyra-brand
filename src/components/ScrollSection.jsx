@@ -66,7 +66,7 @@ const ScrollSection = () => {
             {/* Footer Section */}
             <section className="h-auto w-full bg-elyra-charcoal pointer-events-auto">
                 <div className="py-24 text-center text-white/30 text-xs uppercase tracking-widest">
-                    &copy; 2024 House of Elyra
+                    &copy; 2025 House of Elyra
                 </div>
             </section>
         </Scroll>

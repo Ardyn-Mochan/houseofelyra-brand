@@ -4,7 +4,7 @@ export const blogPosts = [
         slug: 'art-of-layering-perfume',
         title: 'The Art of Layering: How to Create Your Signature Scent',
         excerpt: 'Discover the secrets to combining fragrances to create a scent that is uniquely yours. Learn which notes complement each other and how to balance intensity.',
-        date: 'October 15, 2024',
+        date: 'October 15, 2025',
         author: 'Elyra Scent Team',
         image: '/images/blog-layering.jpg',
         content: `
@@ -30,7 +30,7 @@ export const blogPosts = [
         slug: 'history-of-oud',
         title: 'Liquid Gold: A Brief History of Oud in Perfumery',
         excerpt: 'Trace the origins of one of the world’s most precious ingredients. From ancient rituals to modern luxury, explore why oud continues to captivate.',
-        date: 'November 2, 2024',
+        date: 'November 2, 2025',
         author: 'Sarah Jenkins',
         image: '/images/blog-oud.jpg',
         content: `
@@ -51,7 +51,7 @@ export const blogPosts = [
         slug: 'scent-and-memory',
         title: 'Scent and Memory: Why Fragrance is So Nostalgic',
         excerpt: 'Ever smell a perfume and instantly travel back in time? Science explains the powerful link between our sense of smell and our memories.',
-        date: 'November 20, 2024',
+        date: 'November 20, 2025',
         author: 'Dr. Elena Rossi',
         image: '/images/blog-memory.jpg',
         content: `
@@ -70,7 +70,7 @@ export const blogPosts = [
         slug: 'niche-vs-designer-perfume',
         title: 'Niche vs. Designer Perfumes: What’s the Real Difference?',
         excerpt: 'Unpacking the debate between mass-market appeal and artisanal craftsmanship. Why niche-style fragrances are taking over the luxury market.',
-        date: 'December 1, 2024',
+        date: 'December 1, 2025',
         author: 'Elyra Scent Team',
         image: '/images/blog-niche.jpg',
         content: `
@@ -92,7 +92,7 @@ export const blogPosts = [
         slug: 'make-perfume-last-longer',
         title: 'Longevity Hacks: How to Make Your Perfume Last All Day',
         excerpt: 'Tired of your scent fading by lunchtime? Here are expert-approved tips to boost the staying power of your favorite fragrances.',
-        date: 'December 3, 2024',
+        date: 'December 3, 2025',
         author: 'Isabella Chen',
         image: '/images/blog-longevity.jpg',
         content: `
@@ -114,7 +114,7 @@ export const blogPosts = [
         slug: 'seasonal-scent-guide',
         title: 'Seasonal Shifts: Transitioning Your Scent Wardrobe',
         excerpt: 'Just as you change your wardrobe with the seasons, your fragrance should evolve too. A guide to picking the perfect notes for every climate.',
-        date: 'December 5, 2024',
+        date: 'December 5, 2025',
         author: 'Elyra Scent Team',
         image: '/images/blog-seasons.jpg',
         content: `
