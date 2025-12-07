@@ -49,7 +49,7 @@ export default async function handler(req, res) {
             });
 
             console.log("Session created:", session.id);
-            res.status(200).json({ id: session.id });
+            res.status(200).json({ id: session.id, url: session.url });
         } catch (err) {
             console.error("Stripe Error Details:", err);
             res.status(500).json({ message: `Stripe Error: ${err.message}` });

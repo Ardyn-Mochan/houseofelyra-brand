@@ -21,10 +21,6 @@ const Cart = () => {
     const handleCheckout = async () => {
         setIsCheckingOut(true);
         try {
-            const stripe = await loadStripe(STRIPE_PUBLISHABLE_KEY);
-
-            // TODO: Replace with your actual backend endpoint to create a checkout session
-            // This is a placeholder structure
             const response = await fetch('/api/create-checkout-session', {
                 method: 'POST',
                 headers: {
@@ -60,19 +56,15 @@ const Cart = () => {
 
             const session = await response.json();
 
-            // Redirect to Stripe Checkout
-            const result = await stripe.redirectToCheckout({
-                sessionId: session.id,
-            });
-
-            if (result.error) {
-                console.error(result.error.message);
-                alert(result.error.message);
+            // Redirect to Stripe Checkout using the session URL
+            if (session.url) {
+                window.location.href = session.url;
+            } else {
+                throw new Error('No checkout URL returned from server');
             }
         } catch (error) {
             console.error("Error during checkout:", error);
             alert(`Checkout Failed: ${error.message} (See console for details)`);
-        } finally {
             setIsCheckingOut(false);
         }
     };
