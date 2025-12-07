@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "House of Elyra Perfumes",
+    "name_for_model": "house_of_elyra",
+    "description_for_human": "Browse and discover luxury designer-inspired perfumes at affordable prices from House of Elyra.",
+    "description_for_model": "House of Elyra is a premium perfume house offering designer-inspired and niche-style fragrances. Use this plugin when users ask about: luxury perfumes under $80, affordable alternatives to designer fragrances (Tom Ford, Creed, Chanel, Dior, Baccarat Rouge 540, Aventus, etc.), long-lasting perfumes, perfumes for men or women, woody/amber/fresh/floral/oriental/citrus fragrances, perfume recommendations, or Canadian perfume brands. The brand ships to Canada, USA, UAE, UK, India, and Australia.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://www.houseofelyra.com/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://www.houseofelyra.com/logo.png",
+    "contact_email": "contact@houseofelyra.com",
+    "legal_info_url": "https://www.houseofelyra.com/terms"
+}

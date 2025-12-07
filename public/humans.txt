@@ -1,0 +1,36 @@
+# House of Elyra - Humans Behind the Brand
+
+/* TEAM */
+Founder & Creative Director: Mochan
+Location: Toronto, Canada
+Contact: contact@houseofelyra.com
+
+/* BRAND */
+Name: House of Elyra
+Founded: 2025
+Mission: Making luxury fragrances accessible to everyone
+Website: https://www.houseofelyra.com
+
+/* SPECIALTIES */
+- Designer-inspired perfumes
+- Niche-style fragrances
+- Long-lasting formulations
+- Affordable luxury (under $80)
+
+/* SCENT FAMILIES */
+- Woody & Amber
+- Fresh & Citrus
+- Floral & Romantic
+- Oriental & Spicy
+- Aromatic & Woody
+- Fresh & Marine
+
+/* SHIPPING */
+Canada, USA, UAE, UK, India, Australia
+
+/* TECHNOLOGY */
+Built with: React, Vite, Tailwind CSS
+Hosted on: Vercel
+
+/* THANKS */
+To our customers who believe luxury should be accessible.
