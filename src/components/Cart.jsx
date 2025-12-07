@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_PUBLISHABLE_KEY } from '../config/stripe';
+import { products } from '../data/products';
 
 const Cart = () => {
     const {
         cartItems,
         isCartOpen,
         setIsCartOpen,
+        addToCart,
         removeFromCart,
         updateQuantity,
         getCartTotal,
@@ -73,6 +75,15 @@ const Cart = () => {
     const currentTotal = getCartTotal();
     const remainingForFreeShipping = freeShippingThreshold - currentTotal;
     const progressPercentage = Math.min((currentTotal / freeShippingThreshold) * 100, 100);
+
+    // Smart Suggestions: Get 2 random products not in cart
+    const suggestedProducts = useMemo(() => {
+        const cartIds = new Set(cartItems.map(item => item.id));
+        const available = products.filter(p => !cartIds.has(p.id));
+        // Simple distinct random selection
+        const shuffled = [...available].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, 2);
+    }, [cartItems]);
 
     return (
         <AnimatePresence>
@@ -227,6 +238,44 @@ const Cart = () => {
                                             </div>
                                         </motion.div>
                                     ))}
+                                </div>
+                            )}
+
+                            {/* Smart Suggestions - Upsell */}
+                            {cartItems.length > 0 && suggestedProducts.length > 0 && (
+                                <div className="mt-10 pt-6 border-t border-white/5">
+                                    <h3 className="text-[10px] text-elyra-cream/40 uppercase tracking-[0.2em] mb-4">You Might Also Like</h3>
+                                    <div className="space-y-3">
+                                        {suggestedProducts.map(product => (
+                                            <div key={product.id} className="group flex items-center justify-between p-2 hover:bg-white/5 rounded-sm transition-colors border border-transparent hover:border-white/5">
+                                                <div className="flex items-center gap-3">
+                                                    {/* Image */}
+                                                    <div className="w-10 h-10 bg-elyra-earth/20 overflow-hidden flex-shrink-0">
+                                                        {product.image && (
+                                                            <img
+                                                                src={product.image}
+                                                                alt={product.name}
+                                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    {/* Info */}
+                                                    <div>
+                                                        <p className="text-elyra-cream font-cinzel text-sm leading-none mb-1 group-hover:text-elyra-soft-gold transition-colors">{product.name}</p>
+                                                        <p className="text-elyra-cream/50 text-[10px]">${product.price}</p>
+                                                    </div>
+                                                </div>
+                                                {/* Add Button */}
+                                                <button
+                                                    onClick={() => addToCart(product)}
+                                                    className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center text-elyra-cream/60 hover:text-[#1a1816] hover:bg-elyra-soft-gold hover:border-elyra-soft-gold transition-all"
+                                                    title="Add to Cart"
+                                                >
+                                                    <Plus size={12} strokeWidth={1.5} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
