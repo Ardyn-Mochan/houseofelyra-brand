@@ -88,8 +88,6 @@ const Blog = () => {
                                 <div className="flex flex-col flex-grow">
                                     <div className="flex items-center gap-4 text-xs text-elyra-soft-gold uppercase tracking-widest mb-3">
                                         <span>{post.date}</span>
-                                        <span className="w-1 h-1 rounded-full bg-elyra-soft-gold/50" />
-                                        <span>{post.tags[0]}</span>
                                     </div>
 
                                     <h2 className="text-2xl font-cinzel text-elyra-cream mb-4 group-hover:text-elyra-soft-gold transition-colors duration-300">

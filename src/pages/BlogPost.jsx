@@ -95,18 +95,6 @@ const BlogPost = () => {
                         <p className="text-xl text-elyra-cream/70 font-cormorant leading-relaxed">
                             {post.excerpt}
                         </p>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2 mt-8">
-                            {post.tags.map((tag, index) => (
-                                <span
-                                    key={index}
-                                    className="px-4 py-1.5 border border-elyra-soft-gold/30 text-elyra-soft-gold text-xs uppercase tracking-wider"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
                     </motion.header>
 
                     {/* Featured Image */}
