@@ -23,7 +23,8 @@ export const blogPosts = [
             <h3>Tips for Success</h3>
             <p>Don't be afraid to experiment. Test combinations on a blotter first before applying to your skin. And remember, less is often more—start with one spray of each and adjust as needed.</p>
         `,
-        tags: ['Tips & Tricks', 'Layering', 'Scent Guide']
+        tags: ['Tips & Tricks', 'Layering', 'Scent Guide'],
+        recommendedProducts: ['nebula-gold', 'mystic-oud', 'velvet-rose']
     },
     {
         id: 2,
@@ -44,7 +45,8 @@ export const blogPosts = [
 
             <p>At House of Elyra, our <em>Mystic Oud</em> and <em>Shadow Rift</em> pay homage to this timeless ingredient, blending it with modern notes for a contemporary yet respectful interpretation.</p>
         `,
-        tags: ['Ingredients', 'History', 'Oud']
+        tags: ['Ingredients', 'History', 'Oud'],
+        recommendedProducts: ['mystic-oud', 'shadow-rift', 'ancient-ember']
     },
     {
         id: 3,
@@ -63,7 +65,8 @@ export const blogPosts = [
             <h3>Choosing a Scent for Memories</h3>
             <p>Many people choose a specific fragrance for their wedding day or a special trip, consciously creating a "scent memory" they can revisit later. By wearing a unique perfume during these times, you anchor those moments to that specific aroma.</p>
         `,
-        tags: ['Science', 'Psychology', 'Wellness']
+        tags: ['Science', 'Psychology', 'Wellness'],
+        recommendedProducts: ['nebula-gold', 'velvet-rose', 'lunar-bloom']
     },
     {
         id: 4,
@@ -85,7 +88,8 @@ export const blogPosts = [
             <h3>Finding Your Unique Scent</h3>
             <p>If you don't want to smell like everyone else, niche-style perfumes are the way to go. They offer a chance to wear something that feels personal, rare, and distinctly "you."</p>
         `,
-        tags: ['Education', 'Niche Perfume', 'Luxury']
+        tags: ['Education', 'Niche Perfume', 'Luxury'],
+        recommendedProducts: ['phantom-whisper', 'shadow-rift', 'velvet-rose']
     },
     {
         id: 5,
@@ -107,7 +111,8 @@ export const blogPosts = [
             <h3>Storage Matters</h3>
             <p>Heat, light, and humidity are the enemies of perfume. Storing your bottles in the bathroom is a common mistake. Keep them in a cool, dark place (like a drawer or closet) to preserve their potency and character.</p>
         `,
-        tags: ['Tips & Tricks', 'Longevity', 'How-To']
+        tags: ['Tips & Tricks', 'Longevity', 'How-To'],
+        recommendedProducts: ['nebula-gold', 'mystic-oud', 'ember-noir']
     },
     {
         id: 6,
@@ -126,6 +131,7 @@ export const blogPosts = [
             <h3>Fall & Winter: Warm and Cozy</h3>
             <p>As the temperature drops, reach for richer, deeper scents. Spices, woods, ambers, and gourmand notes (like vanilla or chocolate) shine in the cold. They provide a sense of warmth and comfort. <em>Ember Noir</em> and <em>Mystic Oud</em> are ideal companions for a crisp winter evening.</p>
         `,
-        tags: ['Guides', 'Seasonal', 'Lifestyle']
+        tags: ['Guides', 'Seasonal', 'Lifestyle'],
+        recommendedProducts: ['aegean-star', 'oceanic-halo', 'ember-noir', 'mystic-oud']
     }
 ];

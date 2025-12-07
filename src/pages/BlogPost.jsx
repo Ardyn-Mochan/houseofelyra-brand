@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { blogPosts } from '../data/blogPosts';
+import { products } from '../data/products';
 
 const BlogPost = () => {
     const { slug } = useParams();
@@ -136,6 +137,73 @@ const BlogPost = () => {
                             Expert insights from the House of Elyra fragrance team.
                         </p>
                     </motion.div>
+
+                    {/* Featured Fragrances */}
+                    {post.recommendedProducts && post.recommendedProducts.length > 0 && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.8 }}
+                            className="mt-20"
+                        >
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="h-px flex-grow bg-white/10" />
+                                <h3 className="text-2xl font-cinzel text-elyra-cream">Featured Fragrances</h3>
+                                <div className="h-px flex-grow bg-white/10" />
+                            </div>
+                            <p className="text-center text-elyra-cream/60 font-cormorant mb-10">
+                                Discover scents that complement this article
+                            </p>
+
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {post.recommendedProducts.map((productSlug) => {
+                                    const product = products.find(p => p.slug === productSlug);
+                                    if (!product) return null;
+
+                                    return (
+                                        <Link
+                                            key={product.id}
+                                            to={`/product/${product.slug}`}
+                                            className="group border border-white/10 hover:border-elyra-soft-gold/50 transition-all duration-300 overflow-hidden"
+                                        >
+                                            {/* Product Image */}
+                                            <div className="aspect-square bg-gradient-to-br from-gray-800 to-black overflow-hidden relative">
+                                                {product.image && (
+                                                    <img
+                                                        src={product.image}
+                                                        alt={product.name}
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                                    />
+                                                )}
+                                                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors" />
+                                            </div>
+
+                                            {/* Product Info */}
+                                            <div className="p-6">
+                                                <p className="text-xs text-elyra-soft-gold uppercase tracking-wider mb-2">
+                                                    {product.scentFamily}
+                                                </p>
+                                                <h4 className="text-lg font-cinzel text-elyra-cream group-hover:text-elyra-soft-gold transition-colors mb-2">
+                                                    {product.name}
+                                                </h4>
+                                                <p className="text-elyra-cream/50 text-sm font-cormorant italic mb-4">
+                                                    Inspired by {product.inspiration}
+                                                </p>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-elyra-cream font-semibold">
+                                                        ${product.price.toFixed(2)}
+                                                    </span>
+                                                    <span className="text-xs text-elyra-soft-gold uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                                                        Shop →
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
+                    )}
 
                     {/* Related Articles */}
                     <div className="mt-20">
