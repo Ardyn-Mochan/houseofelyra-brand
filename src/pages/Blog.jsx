@@ -69,46 +69,48 @@ const Blog = () => {
                     {/* Blog Grid */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {blogPosts.map((post, index) => (
-                            <motion.article
+                            <Link
                                 key={post.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.8 }}
-                                className="group flex flex-col h-full"
+                                to={`/blog/${post.slug}`}
+                                className="block h-full"
                             >
-                                {/* Image */}
-                                <div className="aspect-[3/2] overflow-hidden border border-white/5 mb-6 relative">
-                                    <div className="absolute inset-0 bg-elyra-earth/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                                    {/* Placeholder for actual image if not available, using a gradient */}
-                                    <div className={`w-full h-full bg-gradient-to-br from-gray-800 to-black group-hover:scale-105 transition-transform duration-700`} />
-                                </div>
-
-                                {/* Content */}
-                                <div className="flex flex-col flex-grow">
-                                    <div className="flex items-center gap-4 text-xs text-elyra-soft-gold uppercase tracking-widest mb-3">
-                                        <span>{post.date}</span>
+                                <motion.article
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1, duration: 0.8 }}
+                                    className="group flex flex-col h-full cursor-pointer"
+                                >
+                                    {/* Image */}
+                                    <div className="aspect-[3/2] overflow-hidden border border-white/5 mb-6 relative">
+                                        <div className="absolute inset-0 bg-elyra-earth/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                                        {/* Placeholder for actual image if not available, using a gradient */}
+                                        <div className={`w-full h-full bg-gradient-to-br from-gray-800 to-black group-hover:scale-105 transition-transform duration-700`} />
                                     </div>
 
-                                    <h2 className="text-2xl font-cinzel text-elyra-cream mb-4 group-hover:text-elyra-soft-gold transition-colors duration-300">
-                                        {post.title}
-                                    </h2>
+                                    {/* Content */}
+                                    <div className="flex flex-col flex-grow">
+                                        <div className="flex items-center gap-4 text-xs text-elyra-soft-gold uppercase tracking-widest mb-3">
+                                            <span>{post.date}</span>
+                                        </div>
 
-                                    <p className="text-elyra-cream/60 font-cormorant text-lg leading-relaxed mb-6 flex-grow">
-                                        {post.excerpt}
-                                    </p>
+                                        <h2 className="text-2xl font-cinzel text-elyra-cream mb-4 group-hover:text-elyra-soft-gold transition-colors duration-300">
+                                            {post.title}
+                                        </h2>
 
-                                    <Link
-                                        to={`/blog/${post.slug}`}
-                                        className="inline-flex items-center text-xs uppercase tracking-[0.2em] text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 mt-auto"
-                                    >
-                                        Read Article
-                                        <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                        </svg>
-                                    </Link>
-                                </div>
-                            </motion.article>
+                                        <p className="text-elyra-cream/60 font-cormorant text-lg leading-relaxed mb-6 flex-grow">
+                                            {post.excerpt}
+                                        </p>
+
+                                        <div className="inline-flex items-center text-xs uppercase tracking-[0.2em] text-elyra-cream group-hover:text-elyra-soft-gold transition-colors duration-300 mt-auto">
+                                            Read Article
+                                            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </motion.article>
+                            </Link>
                         ))}
                     </div>
 
