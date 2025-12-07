@@ -38,6 +38,7 @@ export default async function handler(req, res) {
                         currency: 'usd',
                         product_data: {
                             name: item.name,
+                            description: 'Premium fragrance from House of Elyra',
                         },
                         unit_amount: Math.round(item.price * 100),
                     },
@@ -46,6 +47,22 @@ export default async function handler(req, res) {
                 mode: 'payment',
                 success_url: `${req.headers.origin}/?success=true`,
                 cancel_url: `${req.headers.origin}/?canceled=true`,
+
+                // Aesthetic and UX improvements
+                submit_type: 'pay',
+                billing_address_collection: 'required',
+                phone_number_collection: {
+                    enabled: true,
+                },
+                shipping_address_collection: {
+                    allowed_countries: ['US', 'CA', 'GB', 'AU'],
+                },
+                allow_promotion_codes: true,
+                custom_text: {
+                    submit: {
+                        message: 'Thank you for choosing House of Elyra',
+                    },
+                },
             });
 
             console.log("Session created:", session.id);
