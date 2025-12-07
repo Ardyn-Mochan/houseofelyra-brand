@@ -5,7 +5,7 @@ export const blogPosts = [
         title: 'The Art of Layering: How to Create Your Signature Scent',
         excerpt: 'Discover the secrets to combining fragrances to create a scent that is uniquely yours. Learn which notes complement each other and how to balance intensity.',
         date: 'October 15, 2025',
-        author: 'Elyra Scent Team',
+        author: 'Mochan',
         image: '/images/blog-layering.jpg',
         content: `
             <p>Fragrance layering, or "cocktailing," is the art of mixing two or more scents to create a bespoke fragrance that expresses your unique personality. It’s not just about spraying two perfumes on top of each other; it’s about understanding how notes interact.</p>
@@ -32,7 +32,7 @@ export const blogPosts = [
         title: 'Liquid Gold: A Brief History of Oud in Perfumery',
         excerpt: 'Trace the origins of one of the world’s most precious ingredients. From ancient rituals to modern luxury, explore why oud continues to captivate.',
         date: 'November 2, 2025',
-        author: 'Sarah Jenkins',
+        author: 'Mochan',
         image: '/images/blog-oud.jpg',
         content: `
             <p>Oud, often referred to as "liquid gold," is one of the most expensive and sought-after ingredients in the world of perfumery. Derived from the resinous heartwood of the agar tree, its scent is complex, woody, animalic, and deeply spiritual.</p>
@@ -54,7 +54,7 @@ export const blogPosts = [
         title: 'Scent and Memory: Why Fragrance is So Nostalgic',
         excerpt: 'Ever smell a perfume and instantly travel back in time? Science explains the powerful link between our sense of smell and our memories.',
         date: 'November 20, 2025',
-        author: 'Dr. Elena Rossi',
+        author: 'Mochan',
         image: '/images/blog-memory.jpg',
         content: `
             <p>Of all our senses, smell is the most intimately linked to memory and emotion. This phenomenon, often called the "Proustian effect," occurs because the olfactory bulb—the part of the brain that processes smells—has direct connections to the amygdala and hippocampus, which handle emotion and memory.</p>
@@ -97,7 +97,7 @@ export const blogPosts = [
         title: 'Longevity Hacks: How to Make Your Perfume Last All Day',
         excerpt: 'Tired of your scent fading by lunchtime? Here are expert-approved tips to boost the staying power of your favorite fragrances.',
         date: 'December 3, 2025',
-        author: 'Isabella Chen',
+        author: 'Mochan',
         image: '/images/blog-longevity.jpg',
         content: `
             <p>We've all been there: you spray your favorite perfume in the morning, and by noon, it's vanished. While the concentration of the perfume (EDP vs. EDT) matters, how you apply it plays a huge role too.</p>
