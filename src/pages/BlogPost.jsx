@@ -112,16 +112,12 @@ const BlogPost = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="prose prose-invert prose-lg max-w-none"
+                        className="article-content"
                     >
                         <div
-                            className="text-elyra-cream/80 font-cormorant text-lg leading-loose space-y-6"
-                            style={{
-                                whiteSpace: 'pre-line'
-                            }}
-                        >
-                            {post.content}
-                        </div>
+                            className="text-elyra-cream/80 font-cormorant text-lg leading-loose"
+                            dangerouslySetInnerHTML={{ __html: post.content }}
+                        />
                     </motion.div>
 
                     {/* Divider */}
