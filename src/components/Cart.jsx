@@ -130,9 +130,9 @@ const Cart = () => {
                             <div className="space-y-2">
                                 <div className="flex justify-between text-xs text-elyra-cream/80 uppercase tracking-wider font-medium">
                                     {remainingForFreeShipping > 0 ? (
-                                        <span>Add <strong>${remainingForFreeShipping.toFixed(2)}</strong> for Free Shipping</span>
+                                        <span>Add <strong>${remainingForFreeShipping.toFixed(2)}</strong> for Free Shipping (CAN & USA)</span>
                                     ) : (
-                                        <span className="text-elyra-soft-gold flex items-center gap-1">✨ You've unlocked Free Shipping</span>
+                                        <span className="text-elyra-soft-gold flex items-center gap-1">✨ You've unlocked Free Shipping (CAN & USA)</span>
                                     )}
                                 </div>
                                 <div className="h-1 bg-white/10 rounded-full overflow-hidden">
@@ -292,7 +292,7 @@ const Cart = () => {
                                     <div className="flex justify-between text-elyra-cream/60 text-sm">
                                         <span>Shipping</span>
                                         <span className={remainingForFreeShipping <= 0 ? "text-elyra-soft-gold" : ""}>
-                                            {remainingForFreeShipping <= 0 ? "Free" : "Calculated at next step"}
+                                            {remainingForFreeShipping <= 0 ? "Free (CAN & USA)" : "Calculated at checkout"}
                                         </span>
                                     </div>
                                 </div>
