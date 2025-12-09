@@ -77,7 +77,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                                 placeholder="Search fragrances, notes, or feelings..."
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
-                                className="w-full bg-transparent text-2xl md:text-5xl font-cinzel text-elyra-cream placeholder:text-elyra-cream/20 focus:outline-none pl-12 md:pl-16 pb-2"
+                                className="w-full bg-transparent text-lg md:text-3xl font-cinzel text-elyra-cream placeholder:text-elyra-cream/20 focus:outline-none pl-12 md:pl-16 pb-2"
                             />
                         </div>
                     </div>
