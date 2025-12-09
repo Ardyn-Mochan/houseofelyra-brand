@@ -157,7 +157,7 @@ const ProductDetail = () => {
                                         Inspired by {product.inspiration}
                                     </span>
                                 </div>
-                                <h1 className="text-4xl md:text-6xl font-cinzel text-elyra-cream mb-4 font-medium leading-tight">
+                                <h1 className="text-3xl md:text-5xl lg:text-6xl font-cinzel text-elyra-cream mb-4 font-medium leading-tight">
                                     {product.name}
                                 </h1>
                                 <div className="flex items-end gap-4 mb-6">
@@ -186,7 +186,7 @@ const ProductDetail = () => {
 
                             {/* Add to Cart Section */}
                             <div className="space-y-4 mb-12">
-                                <div className="flex gap-4">
+                                <div className="flex flex-col sm:flex-row gap-4">
                                     {/* Quantity Stepper */}
                                     <div className="flex border border-white/20 h-14 w-32">
                                         <button

@@ -169,22 +169,22 @@ const Layout = ({ children }) => {
                         className="fixed inset-0 z-40 bg-[#1a1816] flex flex-col justify-center items-center md:hidden"
                     >
                         <nav className="flex flex-col space-y-8 text-center">
-                            <Link to="/" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Home
                             </Link>
-                            <Link to="/shop" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <Link to="/shop" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Shop
                             </Link>
-                            <Link to="/discover" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <Link to="/discover" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Discover
                             </Link>
-                            <Link to="/about" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 About
                             </Link>
-                            <Link to="/blog" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Journal
                             </Link>
-                            <Link to="/elyra" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <Link to="/elyra" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Elyra
                             </Link>
                         </nav>
