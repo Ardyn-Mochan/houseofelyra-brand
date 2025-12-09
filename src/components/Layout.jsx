@@ -123,9 +123,9 @@ const Layout = ({ children }) => {
                     <Link to="/blog" className="relative group text-white/90 hover:text-white transition-colors duration-300">
                         Journal
                     </Link>
-                    <a href="https://wellness.houseofelyra.com/" target="_blank" rel="noopener noreferrer" className="relative group text-white/90 hover:text-white transition-colors duration-300">
+                    <Link to="/elyra" className="relative group text-white/90 hover:text-white transition-colors duration-300">
                         Elyra
-                    </a>
+                    </Link>
                 </nav>
 
                 <div className="flex items-center gap-6 z-50">
@@ -184,9 +184,9 @@ const Layout = ({ children }) => {
                             <Link to="/blog" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Journal
                             </Link>
-                            <a href="https://wellness.houseofelyra.com/" target="_blank" rel="noopener noreferrer" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
+                            <Link to="/elyra" className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
                                 Elyra
-                            </a>
+                            </Link>
                         </nav>
                     </motion.div>
                 )}
