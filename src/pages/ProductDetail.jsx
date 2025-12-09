@@ -126,11 +126,11 @@ const ProductDetail = () => {
                             transition={{ duration: 0.8 }}
                             className="lg:col-span-7 relative group"
                         >
-                            <div className="aspect-square relative overflow-hidden border border-white/5 bg-gradient-to-b from-[#25221e] to-[#141210] shadow-2xl">
+                            <div className="relative overflow-hidden border border-white/5 bg-gradient-to-b from-[#25221e] to-[#141210] shadow-2xl">
                                 <motion.img
                                     src={product.image}
                                     alt={product.name}
-                                    className={`w-full h-full object-cover object-center transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+                                    className={`w-full h-auto object-contain transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
                                     onLoad={() => setImageLoaded(true)}
                                 />
                                 {/* Hover sheen effect */}
