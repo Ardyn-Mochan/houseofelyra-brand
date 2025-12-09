@@ -65,7 +65,7 @@ const Footer = () => {
                     <div>
                         <h4 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-elyra-soft-brown/80">Support</h4>
                         <ul className="space-y-4 text-sm text-elyra-earth/70 font-light">
-                            <li><a href="mailto:houseofelyra@gmail.com" className="hover:text-elyra-soft-gold transition-colors duration-300">Contact Us</a></li>
+                            <li><Link to="/contact" className="hover:text-elyra-soft-gold transition-colors duration-300">Contact Us</Link></li>
                             <li><a href="#" className="hover:text-elyra-soft-gold transition-colors duration-300">Shipping & Returns</a></li>
                             <li><a href="#" className="hover:text-elyra-soft-gold transition-colors duration-300">FAQ</a></li>
 

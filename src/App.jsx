@@ -12,6 +12,7 @@ import Discover from './pages/Discover'; // Added import for Discover
 import ProductDetail from './pages/ProductDetail'; // Added import for ProductDetail
 import Blog from './pages/Blog'; // Added import for Blog
 import BlogPost from './pages/BlogPost'; // Added import for BlogPost
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/blog" element={<Blog />} /> {/* Added new route for /blog */}
           <Route path="/blog/:slug" element={<BlogPost />} /> {/* Blog post detail pages */}
           <Route path="/product/:slug" element={<ProductDetail />} /> {/* Dynamic product pages */}
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>
     </>
