@@ -58,12 +58,15 @@ const About = () => {
 
                         <motion.h2
                             className="text-3xl md:text-4xl font-cinzel text-elyra-cream leading-tight"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 3, duration: 1.5, ease: "easeOut" }}
+                            initial={{ opacity: 0, textShadow: "0 0 0px rgba(218, 165, 32, 0)" }}
+                            animate={{
+                                opacity: 1,
+                                textShadow: "0 0 30px rgba(218, 165, 32, 0.5)"
+                            }}
+                            transition={{ delay: 3, duration: 2, ease: "easeOut" }}
                         >
                             Perfume that finally <br />
-                            <span className="italic text-elyra-soft-gold">feels personal.</span>
+                            <span className="italic text-elyra-soft-gold brightness-125">feels personal.</span>
                         </motion.h2>
                     </div>
                 </div>
