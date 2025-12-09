@@ -38,6 +38,18 @@ const SearchModal = ({ isOpen, onClose }) => {
         setResults(filtered);
     }, [query]);
 
+    // Handle scroll locking
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     // Handle escape key
     useEffect(() => {
         const handleEsc = (e) => {
