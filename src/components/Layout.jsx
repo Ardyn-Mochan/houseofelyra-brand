@@ -3,6 +3,7 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Footer from './Footer';
 import Cart from './Cart';
+import SearchModal from './SearchModal';
 import { useCart } from '../context/CartContext';
 import Lenis from 'lenis';
 
@@ -13,6 +14,7 @@ const Layout = ({ children }) => {
     const { pathname } = useLocation();
     const lenisRef = useRef(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     useEffect(() => {
@@ -128,7 +130,10 @@ const Layout = ({ children }) => {
 
                 <div className="flex items-center gap-6 z-50">
                     {/* Search Icon */}
-                    <button className="text-white/90 hover:text-white transition-colors duration-300">
+                    <button
+                        onClick={() => setIsSearchOpen(true)}
+                        className="text-white/90 hover:text-white transition-colors duration-300"
+                    >
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="11" cy="11" r="8" />
                             <path d="M21 21l-4.35-4.35" />
@@ -222,6 +227,7 @@ const Layout = ({ children }) => {
             </main>
 
             <Cart />
+            <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
             <Footer />
         </div>
     );
