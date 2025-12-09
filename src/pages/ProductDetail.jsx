@@ -137,19 +137,7 @@ const ProductDetail = () => {
                                 <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                             </div>
 
-                            {/* Inspiration Tag - Floating */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5, duration: 0.8 }}
-                                className="absolute -bottom-6 right-6 md:right-12 bg-[#1a1816] px-6 py-4 border border-elyra-soft-gold/30 shadow-xl max-w-xs"
-                            >
-                                <div className="flex items-center gap-2 mb-1">
-                                    <Sparkles size={12} className="text-elyra-soft-gold" />
-                                    <p className="text-[10px] uppercase tracking-[0.2em] text-elyra-soft-gold">Inspiration</p>
-                                </div>
-                                <p className="text-elyra-cream font-cormorant italic text-lg opacity-90">{product.inspiration}</p>
-                            </motion.div>
+
                         </motion.div>
 
                         {/* Product Info (Right) */}
@@ -161,9 +149,14 @@ const ProductDetail = () => {
                         >
                             {/* Header */}
                             <div className="mb-10">
-                                <span className="inline-block px-3 py-1 mb-4 border border-white/10 text-[10px] uppercase tracking-[0.2em] text-elyra-cream/60">
-                                    {product.scentFamily}
-                                </span>
+                                <div className="flex items-center gap-3 mb-4">
+                                    <span className="inline-block px-3 py-1 border border-white/10 text-[10px] uppercase tracking-[0.2em] text-elyra-cream/60">
+                                        {product.scentFamily}
+                                    </span>
+                                    <span className="text-elyra-soft-gold text-xs italic font-cormorant">
+                                        Inspired by {product.inspiration}
+                                    </span>
+                                </div>
                                 <h1 className="text-4xl md:text-6xl font-cinzel text-elyra-cream mb-4 font-medium leading-tight">
                                     {product.name}
                                 </h1>
@@ -217,8 +210,8 @@ const ProductDetail = () => {
                                     <button
                                         onClick={handleAddToCart}
                                         className={`flex-1 h-14 uppercase tracking-[0.2em] text-sm font-semibold transition-all duration-300 relative overflow-hidden group ${addedToCart
-                                                ? 'bg-green-900/80 text-white border border-green-500/30'
-                                                : 'bg-elyra-soft-gold text-[#1a1816] hover:bg-elyra-cream'
+                                            ? 'bg-green-900/80 text-white border border-green-500/30'
+                                            : 'bg-elyra-soft-gold text-[#1a1816] hover:bg-elyra-cream'
                                             }`}
                                     >
                                         <span className="relative z-10 flex items-center justify-center gap-2">
@@ -245,8 +238,8 @@ const ProductDetail = () => {
                                             key={tab}
                                             onClick={() => setActiveTab(tab)}
                                             className={`flex-1 py-4 text-[10px] uppercase tracking-[0.2em] transition-colors ${activeTab === tab
-                                                    ? 'text-elyra-soft-gold border-b border-elyra-soft-gold bg-white/[0.02]'
-                                                    : 'text-elyra-cream/40 border-b border-transparent hover:text-elyra-cream/70'
+                                                ? 'text-elyra-soft-gold border-b border-elyra-soft-gold bg-white/[0.02]'
+                                                : 'text-elyra-cream/40 border-b border-transparent hover:text-elyra-cream/70'
                                                 }`}
                                         >
                                             {tab === 'pairings' ? 'Best For' : tab}
