@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
 
                     {/* Logo Icon */}
                     <Link to="/">
-                        <img src="/logo.png" alt="Elyra Logo" className="w-6 h-6 md:w-7 md:h-7 opacity-90" />
+                        <img src="/logo.png" alt="House of Elyra Perfumes Logo" className="w-6 h-6 md:w-7 md:h-7 opacity-90" />
                     </Link>
                     <Link to="/" className="text-lg md:text-xl font-cinzel font-light tracking-[0.2em] text-white hidden sm:block">
                         HOUSE OF ELYRA

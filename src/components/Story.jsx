@@ -58,7 +58,7 @@ const Story = () => {
                         </p>
 
                         <p className="font-cormorant text-elyra-earth/90 text-xl md:text-2xl leading-relaxed mb-8 font-light">
-                            At Elyra, we craft fragrances that feel personal:<br className="hidden md:inline" />
+                            <strong>Elyra perfumes</strong> are crafted to feel personal:<br className="hidden md:inline" />
                             comfort on hard days, confidence on good ones,<br className="hidden md:inline" />
                             and a quiet reminder of the moments that matter most.
                         </p>
