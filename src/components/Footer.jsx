@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+    const [email, setEmail] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubscribed, setIsSubscribed] = useState(false);
+
+    const handleSubscribe = (e) => {
+        e.preventDefault();
+        if (!email) return;
+
+        setIsSubmitting(true);
+        // Simulate API call
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setIsSubscribed(true);
+            setEmail('');
+        }, 1500);
+    };
+
     return (
         <footer className="bg-elyra-cream-dark text-elyra-earth pt-32 pb-12 border-t border-elyra-taupe/20 relative overflow-hidden">
             {/* Decorative Background */}
@@ -12,7 +29,7 @@ const Footer = () => {
 
                     {/* Brand Column */}
                     <div className="space-y-6">
-                        <h3 className="text-3xl font-cinzel text-elyra-soft-brown tracking-[0.1em]">ELYRA</h3>
+                        <h3 className="text-3xl font-cinzel text-elyra-soft-brown tracking-[0.1em]">HOUSE OF ELYRA</h3>
                         <p className="text-elyra-earth/70 text-sm font-light leading-relaxed">
                             Crafting timeless scents for the modern soul. Experience the essence of eternity.
                         </p>
@@ -61,16 +78,34 @@ const Footer = () => {
                         <p className="text-elyra-earth/70 text-sm font-light mb-6 leading-relaxed">
                             Subscribe to receive updates, access to exclusive deals, and more.
                         </p>
-                        <form className="flex flex-col space-y-4">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="bg-elyra-cream/50 border border-elyra-taupe/20 px-5 py-4 text-sm text-elyra-earth placeholder:text-elyra-earth/40 focus:outline-none focus:border-elyra-soft-gold transition-colors duration-300"
-                            />
-                            <button className="bg-elyra-soft-brown text-elyra-cream px-6 py-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-elyra-earth transition-colors duration-300">
-                                Subscribe
-                            </button>
-                        </form>
+
+                        {isSubscribed ? (
+                            <div className="bg-elyra-soft-gold/20 border border-elyra-soft-gold/30 p-4 rounded-sm">
+                                <p className="text-elyra-soft-brown text-sm font-medium flex items-center gap-2">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                    Welcome to the inner circle.
+                                </p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubscribe} className="flex flex-col space-y-4">
+                                <input
+                                    type="email"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Enter your email"
+                                    disabled={isSubmitting}
+                                    className="bg-elyra-cream/50 border border-elyra-taupe/20 px-5 py-4 text-sm text-elyra-earth placeholder:text-elyra-earth/40 focus:outline-none focus:border-elyra-soft-gold transition-colors duration-300 disabled:opacity-50"
+                                />
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="bg-elyra-soft-brown text-elyra-cream px-6 py-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-elyra-earth transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex justify-center"
+                                >
+                                    {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
 
