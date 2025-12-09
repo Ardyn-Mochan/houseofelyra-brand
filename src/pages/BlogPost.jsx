@@ -105,7 +105,11 @@ const BlogPost = () => {
                         transition={{ duration: 1, delay: 0.2 }}
                         className="aspect-[16/9] mb-16 overflow-hidden border border-white/10"
                     >
-                        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-black" />
+                        <img
+                            src={post.image}
+                            alt={post.title}
+                            className="w-full h-full object-cover"
+                        />
                     </motion.div>
 
                     {/* Content */}

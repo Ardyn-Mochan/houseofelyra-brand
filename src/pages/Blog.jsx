@@ -85,7 +85,11 @@ const Blog = () => {
                                     <div className="aspect-[3/2] overflow-hidden border border-white/5 mb-6 relative">
                                         <div className="absolute inset-0 bg-elyra-earth/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                                         {/* Placeholder for actual image if not available, using a gradient */}
-                                        <div className={`w-full h-full bg-gradient-to-br from-gray-800 to-black group-hover:scale-105 transition-transform duration-700`} />
+                                        <img
+                                            src={post.image}
+                                            alt={post.title}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                        />
                                     </div>
 
                                     {/* Content */}
