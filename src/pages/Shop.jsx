@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { products } from '../data/products';
+import { products, GENDER_CLASSIFICATION, OCCASION_CLASSIFICATION, SEASON_CLASSIFICATION } from '../data/products';
 import { scentFamilies } from '../data/scentFamilies';
 
 const Shop = () => {
@@ -46,14 +46,14 @@ const Shop = () => {
         // 3. Filter by Season
         if (filters.season !== 'All') {
             result = result.filter(product =>
-                product.season.includes(filters.season) || product.season.includes('All Seasons')
+                product.season && product.season.includes(filters.season)
             );
         }
 
         // 4. Filter by Occasion
         if (filters.occasion !== 'All') {
             result = result.filter(product =>
-                product.occasion.some(occ => occ.includes(filters.occasion)) || product.occasion.includes('All Occasions')
+                product.occasion && product.occasion.includes(filters.occasion)
             );
         }
 
@@ -67,11 +67,11 @@ const Shop = () => {
         return family ? family.name : "All Scents";
     }, [category]);
 
-    // Unique Options for Filters (Derived from Data)
+    // Unique Options for Filters (Derived from Master Data)
     const filterOptions = {
-        gender: ['All', 'Feminine', 'Masculine', 'Unisex'],
-        season: ['All', 'Spring', 'Summer', 'Fall', 'Winter'],
-        occasion: ['All', 'Daytime', 'Evening', 'Special Occasions', 'Date Night']
+        gender: ['All', ...Object.keys(GENDER_CLASSIFICATION)],
+        season: ['All', ...Object.keys(SEASON_CLASSIFICATION)],
+        occasion: ['All', ...Object.keys(OCCASION_CLASSIFICATION)]
     };
 
     return (
@@ -270,8 +270,8 @@ const Shop = () => {
                                         {product.name}
                                     </h3>
                                 </Link>
-                                <p className="text-xs text-elyra-cream/50 italic font-light">
-                                    Inspired by: {product.inspiration}
+                                <p className="text-[10px] sm:text-xs text-elyra-soft-gold/70 italic font-light tracking-wide mt-1">
+                                    Inspired by {product.inspiration}
                                 </p>
                                 <p className="text-xs text-elyra-cream/40 uppercase tracking-wider">
                                     {product.scentFamily}
