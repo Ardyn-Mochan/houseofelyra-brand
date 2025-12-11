@@ -144,8 +144,8 @@ const Discover = () => {
                                                         key={gender}
                                                         onClick={() => handleFilterClick('gender', gender)}
                                                         className={`w-full text-left px-4 py-3 text-sm uppercase tracking-widest transition-all ${selectedFilters.gender === gender
-                                                                ? 'bg-elyra-soft-gold text-[#1a1816]'
-                                                                : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
+                                                            ? 'bg-elyra-soft-gold text-[#1a1816]'
+                                                            : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
                                                             }`}
                                                     >
                                                         {gender}
@@ -187,8 +187,8 @@ const Discover = () => {
                                                         key={occasion}
                                                         onClick={() => handleFilterClick('occasion', occasion)}
                                                         className={`w-full text-left px-4 py-3 text-sm uppercase tracking-widest transition-all flex items-center gap-3 ${selectedFilters.occasion === occasion
-                                                                ? 'bg-elyra-soft-gold text-[#1a1816]'
-                                                                : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
+                                                            ? 'bg-elyra-soft-gold text-[#1a1816]'
+                                                            : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
                                                             }`}
                                                     >
                                                         {occasion === 'Daytime' && <Sun className="w-4 h-4" />}
@@ -234,8 +234,8 @@ const Discover = () => {
                                                         key={season}
                                                         onClick={() => handleFilterClick('season', season)}
                                                         className={`w-full text-left px-4 py-3 text-sm uppercase tracking-widest transition-all flex items-center gap-3 ${selectedFilters.season === season
-                                                                ? 'bg-elyra-soft-gold text-[#1a1816]'
-                                                                : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
+                                                            ? 'bg-elyra-soft-gold text-[#1a1816]'
+                                                            : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
                                                             }`}
                                                     >
                                                         {season === 'Spring' && <Flower className="w-4 h-4" />}
@@ -279,7 +279,7 @@ const Discover = () => {
                                     </div>
 
                                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                                        {filteredProducts.slice(0, 10).map((product, index) => (
+                                        {filteredProducts.map((product, index) => (
                                             <motion.div
                                                 key={product.id}
                                                 initial={{ opacity: 0, y: 20 }}
@@ -304,6 +304,9 @@ const Discover = () => {
                                                     <h4 className="font-cinzel text-sm text-elyra-cream group-hover:text-elyra-soft-gold transition-colors text-center">
                                                         {product.name}
                                                     </h4>
+                                                    <p className="text-[10px] sm:text-xs text-elyra-soft-gold/70 italic text-center mt-1 font-light tracking-wide">
+                                                        Inspired by {product.inspiration}
+                                                    </p>
                                                     <p className="text-xs text-elyra-cream/40 text-center mt-1">
                                                         ${product.price}
                                                     </p>
@@ -311,17 +314,6 @@ const Discover = () => {
                                             </motion.div>
                                         ))}
                                     </div>
-
-                                    {filteredProducts.length > 10 && (
-                                        <div className="text-center mt-8">
-                                            <Link
-                                                to="/shop"
-                                                className="inline-block px-8 py-3 border border-elyra-soft-gold/50 text-elyra-cream text-xs uppercase tracking-[0.15em] hover:bg-elyra-soft-gold hover:text-[#1a1816] transition-all duration-300"
-                                            >
-                                                View All {filteredProducts.length} Scents
-                                            </Link>
-                                        </div>
-                                    )}
                                 </motion.div>
                             )}
                         </AnimatePresence>
