@@ -109,7 +109,7 @@ const ElyraApp = () => {
                             className="relative z-10 w-[320px] rounded-[40px] border-[12px] border-[#2a2620] shadow-2xl overflow-hidden bg-[#1a1816]"
                         >
                             <img
-                                src="/images/app-preview.png"
+                                src="/images/elyra-app-new.png"
                                 alt="Elyra App Interface"
                                 className="w-full h-auto object-cover"
                             />
