@@ -1,13 +1,61 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { getFullSchema } from '../data/seoSchema';
+import { ChevronDown, Sparkles, Sun, Moon, Heart, Briefcase, Star, Leaf, Snowflake, Flower } from 'lucide-react';
 
-import { scentFamilies } from '../data/scentFamilies';
+import { scentFamilies, genderClassification, occasionClassification, seasonClassification } from '../data/scentFamilies';
+import { products } from '../data/products';
 
 const Discover = () => {
     const schemaData = getFullSchema();
+    const navigate = useNavigate();
+
+    // Active filter section
+    const [activeSection, setActiveSection] = useState(null);
+    const [selectedFilters, setSelectedFilters] = useState({
+        gender: null,
+        occasion: null,
+        season: null
+    });
+
+    // Get filtered products based on selection
+    const getFilteredProducts = (type, value) => {
+        let productNames = [];
+
+        if (type === 'gender') {
+            productNames = genderClassification[value] || [];
+        } else if (type === 'occasion') {
+            productNames = occasionClassification[value] || [];
+        } else if (type === 'season') {
+            productNames = seasonClassification[value] || [];
+        }
+
+        return products.filter(p => productNames.includes(p.name));
+    };
+
+    const handleFilterClick = (type, value) => {
+        setSelectedFilters(prev => ({
+            ...prev,
+            [type]: prev[type] === value ? null : value
+        }));
+    };
+
+    const filteredProducts = useMemo(() => {
+        if (selectedFilters.gender) {
+            return getFilteredProducts('gender', selectedFilters.gender);
+        }
+        if (selectedFilters.occasion) {
+            return getFilteredProducts('occasion', selectedFilters.occasion);
+        }
+        if (selectedFilters.season) {
+            return getFilteredProducts('season', selectedFilters.season);
+        }
+        return [];
+    }, [selectedFilters]);
+
+    const activeFilterLabel = selectedFilters.gender || selectedFilters.occasion || selectedFilters.season;
 
     return (
         <>
@@ -50,17 +98,236 @@ const Discover = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-20 text-center max-w-4xl mx-auto"
+                        className="mb-16 text-center max-w-4xl mx-auto"
                     >
                         <h1 className="text-3xl md:text-5xl font-cinzel text-elyra-cream mb-6 tracking-wide leading-tight">
-                            Discover Elyra: Luxury-Inspired & Niche-Style Perfumes
+                            Discover Your Signature Scent
                         </h1>
                         <p className="text-elyra-cream/70 font-cormorant text-xl md:text-2xl leading-relaxed">
-                            Uncover a world where designer-inspired scents meet premium quality and affordable elegance. Explore our curated scent families — timeless, expressive, and refined.
+                            Explore our curated collection by scent family, gender, occasion, or season. Find the perfect fragrance that speaks to your identity.
                         </p>
                     </motion.header>
 
-                    {/* Explore Scent Families */}
+                    {/* Quick Filters - Interactive Cards */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="mb-20"
+                    >
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+                            {/* By Gender */}
+                            <div className="border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
+                                <button
+                                    onClick={() => setActiveSection(activeSection === 'gender' ? null : 'gender')}
+                                    className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <Sparkles className="w-5 h-5 text-elyra-soft-gold" />
+                                        <span className="text-elyra-cream font-cinzel tracking-wide">By Gender</span>
+                                    </div>
+                                    <ChevronDown className={`w-4 h-4 text-elyra-cream/50 transition-transform ${activeSection === 'gender' ? 'rotate-180' : ''}`} />
+                                </button>
+                                <AnimatePresence>
+                                    {activeSection === 'gender' && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="border-t border-white/10"
+                                        >
+                                            <div className="p-6 space-y-3">
+                                                {['Feminine', 'Masculine', 'Unisex'].map(gender => (
+                                                    <button
+                                                        key={gender}
+                                                        onClick={() => handleFilterClick('gender', gender)}
+                                                        className={`w-full text-left px-4 py-3 text-sm uppercase tracking-widest transition-all ${selectedFilters.gender === gender
+                                                                ? 'bg-elyra-soft-gold text-[#1a1816]'
+                                                                : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
+                                                            }`}
+                                                    >
+                                                        {gender}
+                                                        <span className="float-right text-xs opacity-60">
+                                                            {genderClassification[gender]?.length || 0} scents
+                                                        </span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
+                            {/* By Occasion */}
+                            <div className="border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
+                                <button
+                                    onClick={() => setActiveSection(activeSection === 'occasion' ? null : 'occasion')}
+                                    className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <Star className="w-5 h-5 text-elyra-soft-gold" />
+                                        <span className="text-elyra-cream font-cinzel tracking-wide">By Occasion</span>
+                                    </div>
+                                    <ChevronDown className={`w-4 h-4 text-elyra-cream/50 transition-transform ${activeSection === 'occasion' ? 'rotate-180' : ''}`} />
+                                </button>
+                                <AnimatePresence>
+                                    {activeSection === 'occasion' && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="border-t border-white/10"
+                                        >
+                                            <div className="p-6 space-y-3">
+                                                {Object.keys(occasionClassification).map(occasion => (
+                                                    <button
+                                                        key={occasion}
+                                                        onClick={() => handleFilterClick('occasion', occasion)}
+                                                        className={`w-full text-left px-4 py-3 text-sm uppercase tracking-widest transition-all flex items-center gap-3 ${selectedFilters.occasion === occasion
+                                                                ? 'bg-elyra-soft-gold text-[#1a1816]'
+                                                                : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
+                                                            }`}
+                                                    >
+                                                        {occasion === 'Daytime' && <Sun className="w-4 h-4" />}
+                                                        {occasion === 'Evening' && <Moon className="w-4 h-4" />}
+                                                        {occasion === 'Special Occasions' && <Sparkles className="w-4 h-4" />}
+                                                        {occasion === 'Date Night' && <Heart className="w-4 h-4" />}
+                                                        {occasion}
+                                                        <span className="ml-auto text-xs opacity-60">
+                                                            {occasionClassification[occasion]?.length || 0}
+                                                        </span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
+                            {/* By Season */}
+                            <div className="border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
+                                <button
+                                    onClick={() => setActiveSection(activeSection === 'season' ? null : 'season')}
+                                    className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <Leaf className="w-5 h-5 text-elyra-soft-gold" />
+                                        <span className="text-elyra-cream font-cinzel tracking-wide">By Season</span>
+                                    </div>
+                                    <ChevronDown className={`w-4 h-4 text-elyra-cream/50 transition-transform ${activeSection === 'season' ? 'rotate-180' : ''}`} />
+                                </button>
+                                <AnimatePresence>
+                                    {activeSection === 'season' && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="border-t border-white/10"
+                                        >
+                                            <div className="p-6 space-y-3">
+                                                {Object.keys(seasonClassification).map(season => (
+                                                    <button
+                                                        key={season}
+                                                        onClick={() => handleFilterClick('season', season)}
+                                                        className={`w-full text-left px-4 py-3 text-sm uppercase tracking-widest transition-all flex items-center gap-3 ${selectedFilters.season === season
+                                                                ? 'bg-elyra-soft-gold text-[#1a1816]'
+                                                                : 'text-elyra-cream/70 hover:bg-white/10 hover:text-elyra-cream'
+                                                            }`}
+                                                    >
+                                                        {season === 'Spring' && <Flower className="w-4 h-4" />}
+                                                        {season === 'Summer' && <Sun className="w-4 h-4" />}
+                                                        {season === 'Fall' && <Leaf className="w-4 h-4" />}
+                                                        {season === 'Winter' && <Snowflake className="w-4 h-4" />}
+                                                        {season}
+                                                        <span className="ml-auto text-xs opacity-60">
+                                                            {seasonClassification[season]?.length || 0}
+                                                        </span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        </div>
+
+                        {/* Filtered Products Display */}
+                        <AnimatePresence>
+                            {activeFilterLabel && filteredProducts.length > 0 && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="mt-12 max-w-6xl mx-auto"
+                                >
+                                    <div className="flex items-center justify-between mb-8">
+                                        <h3 className="text-xl font-cinzel text-elyra-cream">
+                                            {activeFilterLabel} Scents
+                                            <span className="text-elyra-soft-gold ml-2">({filteredProducts.length})</span>
+                                        </h3>
+                                        <button
+                                            onClick={() => setSelectedFilters({ gender: null, occasion: null, season: null })}
+                                            className="text-xs uppercase tracking-widest text-elyra-cream/50 hover:text-elyra-soft-gold transition-colors"
+                                        >
+                                            Clear Filter
+                                        </button>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                        {filteredProducts.slice(0, 10).map((product, index) => (
+                                            <motion.div
+                                                key={product.id}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: index * 0.05 }}
+                                            >
+                                                <Link
+                                                    to={`/product/${product.slug}`}
+                                                    className="group block"
+                                                >
+                                                    <div className="aspect-[4/5] bg-elyra-earth/20 overflow-hidden border border-white/5 mb-3">
+                                                        {product.image ? (
+                                                            <img
+                                                                src={product.image}
+                                                                alt={product.name}
+                                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85 group-hover:opacity-100"
+                                                            />
+                                                        ) : (
+                                                            <div className="w-full h-full bg-white/5" />
+                                                        )}
+                                                    </div>
+                                                    <h4 className="font-cinzel text-sm text-elyra-cream group-hover:text-elyra-soft-gold transition-colors text-center">
+                                                        {product.name}
+                                                    </h4>
+                                                    <p className="text-xs text-elyra-cream/40 text-center mt-1">
+                                                        ${product.price}
+                                                    </p>
+                                                </Link>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+
+                                    {filteredProducts.length > 10 && (
+                                        <div className="text-center mt-8">
+                                            <Link
+                                                to="/shop"
+                                                className="inline-block px-8 py-3 border border-elyra-soft-gold/50 text-elyra-cream text-xs uppercase tracking-[0.15em] hover:bg-elyra-soft-gold hover:text-[#1a1816] transition-all duration-300"
+                                            >
+                                                View All {filteredProducts.length} Scents
+                                            </Link>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.section>
+
+                    {/* Scent Families Section */}
                     <motion.section
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -102,9 +369,9 @@ const Discover = () => {
 
                                         {/* Featured Products */}
                                         <div className="mb-6">
-                                            <p className="text-xs uppercase tracking-widest text-elyra-cream/40 mb-3">Featured Scents</p>
+                                            <p className="text-xs uppercase tracking-widest text-elyra-cream/40 mb-3">Featured Scents ({family.products.length})</p>
                                             <div className="flex flex-wrap gap-2">
-                                                {family.products.map((product) => (
+                                                {family.products.slice(0, 5).map((product) => (
                                                     <Link
                                                         key={product}
                                                         to={`/product/${product.toLowerCase().replace(/ /g, '-')}`}
@@ -113,6 +380,11 @@ const Discover = () => {
                                                         {product}
                                                     </Link>
                                                 ))}
+                                                {family.products.length > 5 && (
+                                                    <span className="px-3 py-1.5 text-elyra-cream/40 text-xs">
+                                                        +{family.products.length - 5} more
+                                                    </span>
+                                                )}
                                             </div>
                                         </div>
 
@@ -151,7 +423,7 @@ const Discover = () => {
                             Featured Scents & Bestseller Highlights
                         </h2>
                         <p className="text-elyra-cream/60 font-cormorant text-lg text-center max-w-3xl mx-auto mb-10">
-                            Our top-rated perfumes — best sellers across men's, women's, and unisex lines — praised for longevity, projection, and their uncanny resemblance to beloved designer classics. Discover scents that evoke mood, aura, identity.
+                            Our top-rated perfumes — best sellers across men's, women's, and unisex lines — praised for longevity, projection, and their uncanny resemblance to beloved designer classics.
                         </p>
                         <div className="text-center">
                             <Link
@@ -163,28 +435,7 @@ const Discover = () => {
                         </div>
                     </motion.section>
 
-                    {/* Perfume for Every Mood */}
-                    <motion.section
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="mb-24 max-w-4xl mx-auto"
-                    >
-                        <h2 className="text-2xl md:text-3xl font-cinzel text-elyra-cream mb-6 text-center">
-                            Perfume for Every Mood, Every Identity
-                        </h2>
-                        <div className="text-center space-y-6">
-                            <p className="text-elyra-cream/70 font-cormorant text-lg leading-relaxed">
-                                Whether you're seeking a unisex woody-amber perfume that whispers confidence, a bright citrus spritz for daytime energy, or a romantic floral that evokes nostalgia — Elyra has a fragrance that aligns with your identity, aura, and expression.
-                            </p>
-                            <p className="text-elyra-cream/60 font-light">
-                                Our perfumes are designed to perform — long-lasting, elegant sillage, wearable day to night — giving you the freedom to express, explore, and belong.
-                            </p>
-                        </div>
-                    </motion.section>
-
-                    {/* Why Elyra Section - At Bottom */}
+                    {/* Why Elyra Section */}
                     <motion.section
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
