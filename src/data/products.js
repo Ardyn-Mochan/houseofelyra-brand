@@ -1,7 +1,7 @@
 // Centralized product data for House of Elyra
 // Used across Shop, Product Detail, and SEO pages
 
-export const products = [
+const rawProducts = [
     {
         id: 1,
         name: "Nebula Gold",
@@ -1204,7 +1204,7 @@ const applyMasterClassification = (productsList) => {
 };
 
 // Apply classifications and export
-const classifiedProducts = applyMasterClassification(products);
+const classifiedProducts = applyMasterClassification(rawProducts);
 
 export { classifiedProducts as products };
 export const getProductBySlug = (slug) => classifiedProducts.find(p => p.slug === slug);
