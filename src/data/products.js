@@ -1042,6 +1042,7 @@ const OCCASION_CLASSIFICATION = {
     ]
 };
 
+// Season Classification - EXACT from master table (Strictly Enforced)
 const SEASON_CLASSIFICATION = {
     Spring: [
         'Blossom Ray',
