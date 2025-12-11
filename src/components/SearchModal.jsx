@@ -112,7 +112,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                                         transition={{ delay: index * 0.05 }}
                                     >
                                         <Link
-                                            to={`/shop?product=${product.id}`} // Or a dedicated product page route if it exists
+                                            to={`/product/${product.slug}`}
                                             onClick={onClose}
                                             className="group block space-y-4"
                                         >
@@ -138,6 +138,11 @@ const SearchModal = ({ isOpen, onClose }) => {
                                                 <h3 className="font-cinzel text-elyra-cream text-lg group-hover:text-elyra-soft-gold transition-colors">
                                                     {product.name}
                                                 </h3>
+                                                {product.inspiration && (
+                                                    <p className="text-xs text-elyra-soft-gold/70 italic">
+                                                        Inspired by {product.inspiration}
+                                                    </p>
+                                                )}
                                                 <p className="text-xs text-elyra-cream/50 uppercase tracking-wider">
                                                     {product.scentFamily}
                                                 </p>
