@@ -69,7 +69,7 @@ const ElyraApp = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
                         >
-                            <span className="text-elyra-soft-gold text-sm uppercase tracking-[0.2em] border border-elyra-soft-gold/30 px-3 py-1 rounded-full">Coming Soon</span>
+                            {/* Removed Coming Soon badge */}
                             <h1 className="text-5xl md:text-7xl font-cinzel text-elyra-cream mt-6 leading-tight">
                                 Wellness, <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-teal-300">Reimagined.</span>
@@ -92,7 +92,7 @@ const ElyraApp = () => {
                             className="flex gap-4"
                         >
                             <a href="#waitlist" className="bg-elyra-soft-gold text-[#1a1816] px-8 py-4 uppercase tracking-[0.2em] font-semibold hover:bg-white transition-colors duration-300">
-                                Join Waitlist
+                                Access Now
                             </a>
                             <button className="flex items-center gap-3 border border-white/20 text-elyra-cream px-8 py-4 uppercase tracking-[0.2em] font-semibold hover:bg-white/5 transition-colors duration-300 group">
                                 <Play size={16} className="group-hover:fill-current" />
@@ -110,9 +110,9 @@ const ElyraApp = () => {
                             className="relative z-10 w-[320px] rounded-[40px] border-[12px] border-[#2a2620] shadow-2xl overflow-hidden bg-[#1a1816]"
                         >
                             <img
-                                src="/images/app-preview.png"
+                                src="/images/elyra-app-screen.png"
                                 alt="Elyra App Interface"
-                                className="w-full h-auto object-cover"
+                                className="w-full h-full object-cover"
                             />
                         </motion.div>
 
@@ -189,7 +189,7 @@ const ElyraApp = () => {
                                 disabled={isSubmitting}
                                 className="bg-elyra-soft-gold text-[#1a1816] px-8 py-4 uppercase tracking-[0.2em] font-semibold hover:bg-white transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap"
                             >
-                                {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+                                {isSubmitting ? 'Processing...' : 'Access Now'}
                             </button>
                         </form>
                     )}
