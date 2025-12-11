@@ -12,12 +12,11 @@ const ElyraApp = () => {
         if (!email) return;
 
         setIsSubmitting(true);
-        // Simulate API call
+
+        // Simulate processing then redirect
         setTimeout(() => {
-            setIsSubmitting(false);
-            setIsJoined(true);
-            setEmail('');
-        }, 1500);
+            window.location.href = 'https://wellness.houseofelyra.com';
+        }, 800);
     };
 
     const features = [
@@ -110,9 +109,9 @@ const ElyraApp = () => {
                             className="relative z-10 w-[320px] rounded-[40px] border-[12px] border-[#2a2620] shadow-2xl overflow-hidden bg-[#1a1816]"
                         >
                             <img
-                                src="/images/elyra-app-screen.png"
+                                src="/images/app-preview.png"
                                 alt="Elyra App Interface"
-                                className="w-full h-full object-cover"
+                                className="w-full h-auto object-cover"
                             />
                         </motion.div>
 
