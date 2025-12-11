@@ -929,67 +929,234 @@ export const products = [
 
 const GENDER_CLASSIFICATION = {
     Feminine: [
-        'Lunar Silk', 'Starlit Femme', 'Celestial Rose', 'Lunar Bloom',
-        'Blossom Ray', 'Midnight Petal', 'Aurora Bloom', 'Stellar Velvet',
-        'Rose Nebula', 'Midnight Aura', 'Petal Sphere', 'Cloud Meadow', 'Iris Halo',
-        'Fire Blossom', 'Nightfall Rose', 'Flora Nova', 'Solar Bloom', 'Crystal Dawn',
-        'Stellar Bloom', 'Astral Wonder', 'Golden Stardust', 'Velvet Cosmos', 'Ancient Ember'
+        'Lunar Silk',
+        'Starlit Femme',
+        'Celestial Rose',
+        'Lunar Bloom',
+        'Ember Noir',
+        'Solar Noir',
+        'Blossom Ray',
+        'Midnight Petal',
+        'Aurora Bloom',
+        'Stellar Velvet',
+        'Rose Nebula',
+        'Midnight Aura',
+        'Petal Sphere',
+        'Cloud Meadow',
+        'Iris Halo',
+        'Fire Blossom',
+        'Nightfall Rose',
+        'Flora Nova',
+        'Solar Bloom',
+        'Crystal Dawn',
+        'Stellar Bloom',
+        'Astral Wonder',
+        'Golden Stardust',
+        'Velvet Cosmos',
+        'Ancient Ember'
     ],
     Masculine: [
-        'Helios Peak', 'Frost Zenith', 'Ember Pulse', 'Eternal Ember', 'Shadow Rift',
-        'Solar Prism', 'Volcanic Crown', 'Nightforge', 'Tidal Origin', 'Cosmic Noir',
-        'Aegean Surge', 'Azure Pulse', 'Ember Royale', 'Serpent Star', 'Starborn Drift',
-        'Radiant Eclipse', 'Ember Strike', 'Nightfall Ember', 'Solar Apex', 'Aegean Star',
-        'Ember Noir', 'Solar Noir'
+        'Helios Peak',
+        'Frost Zenith',
+        'Ember Pulse',
+        'Eternal Ember',
+        'Shadow Rift',
+        'Solar Prism',
+        'Volcanic Crown',
+        'Nightforge',
+        'Tidal Origin',
+        'Cosmic Noir',
+        'Aegean Surge',
+        'Azure Pulse',
+        'Ember Royale',
+        'Serpent Star',
+        'Starborn Drift',
+        'Radiant Eclipse',
+        'Ember Strike',
+        'Nightfall Ember',
+        'Mystic Oud',
+        'Solar Apex'
     ],
     Unisex: [
-        'Nebula Gold', 'Solstice Aura', 'Aether Santal', 'Oceanic Halo', 'Mystic Oud',
-        'Amber Radiance'
+        'Nebula Gold',
+        'Solstice Aura',
+        'Tidal Origin',
+        'Aether Santal',
+        'Oceanic Halo'
     ]
 };
 
 const OCCASION_CLASSIFICATION = {
     Daytime: [
-        'Solstice Aura', 'Frost Zenith', 'Aegean Star', 'Azure Pulse', 'Cloud Meadow',
-        'Blossom Ray', 'Aurora Bloom', 'Stellar Velvet', 'Solar Prism', 'Oceanic Halo',
-        'Velvet Cosmos', 'Crystal Dawn', 'Stellar Bloom', 'Petal Sphere', 'Flora Nova'
+        'Solstice Aura',
+        'Frost Zenith',
+        'Aegean Star',
+        'Azure Pulse',
+        'Cloud Meadow',
+        'Blossom Ray',
+        'Aurora Bloom',
+        'Stellar Velvet',
+        'Solar Prism',
+        'Oceanic Halo',
+        'Velvet Cosmos'
     ],
     Evening: [
-        'Nebula Gold', 'Lunar Silk', 'Ember Pulse', 'Eternal Ember', 'Shadow Rift',
-        'Nightforge', 'Solar Noir', 'Ember Noir', 'Ember Royale', 'Midnight Aura',
-        'Mystic Oud', 'Nightfall Ember', 'Ancient Ember', 'Amber Radiance', 'Nightfall Rose'
+        'Nebula Gold',
+        'Lunar Silk',
+        'Ember Pulse',
+        'Eternal Ember',
+        'Shadow Rift',
+        'Nightforge',
+        'Solar Noir',
+        'Ember Noir',
+        'Ember Royale',
+        'Midnight Aura',
+        'Mystic Oud',
+        'Nightfall Ember',
+        'Ancient Ember',
+        'Amber Radiance'
     ],
     'Special Occasions': [
-        'Nebula Gold', 'Eternal Ember', 'Shadow Rift', 'Volcanic Crown', 'Solar Noir',
-        'Mystic Oud', 'Crystal Dawn', 'Golden Stardust', 'Astral Wonder', 'Fire Blossom',
-        'Solar Apex'
+        'Nebula Gold',
+        'Eternal Ember',
+        'Shadow Rift',
+        'Volcanic Crown',
+        'Solar Noir',
+        'Mystic Oud',
+        'Crystal Dawn',
+        'Golden Stardust',
+        'Astral Wonder',
+        'Fire Blossom'
     ],
     'Date Night': [
-        'Ember Pulse', 'Ember Noir', 'Solar Noir', 'Rose Nebula', 'Velvet Cosmos',
-        'Midnight Aura', 'Lunar Silk', 'Celestial Rose', 'Astral Wonder', 'Golden Stardust',
-        'Nightfall Rose', 'Fire Blossom'
+        'Ember Pulse',
+        'Ember Noir',
+        'Solar Noir',
+        'Rose Nebula',
+        'Velvet Cosmos',
+        'Midnight Aura',
+        'Lunar Silk',
+        'Celestial Rose',
+        'Astral Wonder',
+        'Golden Stardust'
     ]
 };
 
 const SEASON_CLASSIFICATION = {
     Spring: [
-        'Blossom Ray', 'Aurora Bloom', 'Stellar Velvet', 'Aegean Star', 'Cloud Meadow',
-        'Flora Nova', 'Petal Sphere', 'Stellar Bloom', 'Iris Halo'
+        'Blossom Ray',
+        'Aurora Bloom',
+        'Stellar Velvet',
+        'Aegean Star',
+        'Cloud Meadow',
+        'Flora Nova',
+        'Petal Sphere'
     ],
     Summer: [
-        'Solstice Aura', 'Frost Zenith', 'Aegean Surge', 'Azure Pulse', 'Radiant Eclipse',
-        'Solar Prism', 'Oceanic Halo', 'Solar Apex', 'Starborn Drift', 'Tidal Origin',
-        'Aegean Star', 'Blossom Ray'
+        'Solstice Aura',
+        'Frost Zenith',
+        'Aegean Surge',
+        'Azure Pulse',
+        'Radiant Eclipse',
+        'Solar Prism',
+        'Oceanic Halo',
+        'Solar Apex',
+        'Starborn Drift'
     ],
     Fall: [
-        'Lunar Silk', 'Ember Pulse', 'Eternal Ember', 'Volcanic Crown', 'Ember Royale',
-        'Mystic Oud', 'Crystal Dawn', 'Stellar Bloom', 'Velvet Cosmos', 'Helios Peak',
-        'Midnight Petal', 'Nightfall Rose'
+        'Lunar Silk',
+        'Ember Pulse',
+        'Eternal Ember',
+        'Volcanic Crown',
+        'Ember Royale',
+        'Mystic Oud',
+        'Crystal Dawn',
+        'Stellar Bloom',
+        'Velvet Cosmos'
     ],
     Winter: [
-        'Nebula Gold', 'Shadow Rift', 'Ember Noir', 'Solar Noir', 'Nightforge',
-        'Amber Radiance', 'Nightfall Ember', 'Ancient Ember', 'Golden Stardust',
-        'Midnight Aura', 'Starlit Femme', 'Fire Blossom'
+        'Nebula Gold',
+        'Shadow Rift',
+        'Ember Noir',
+        'Solar Noir',
+        'Nightforge',
+        'Amber Radiance',
+        'Nightfall Ember',
+        'Ancient Ember',
+        'Golden Stardust'
+    ]
+};
+
+// NOTE FAMILY / SCENT FAMILY CLASSIFICATION
+const NOTE_FAMILY_CLASSIFICATION = {
+    'woody-amber': [
+        'Nebula Gold',
+        'Shadow Rift',
+        'Eternal Ember',
+        'Ember Noir',
+        'Ember Royale',
+        'Nightfall Ember',
+        'Mystic Oud',
+        'Ancient Ember',
+        'Nightfall Rose',
+        'Crystal Dawn',
+        'Petal Sphere'
+    ],
+    'fresh-citrus': [
+        'Solstice Aura',
+        'Solar Prism',
+        'Aegean Star',
+        'Azure Pulse',
+        'Radiant Eclipse',
+        'Solar Apex',
+        'Frost Zenith',
+        'Starborn Drift'
+    ],
+    'floral-romantic': [
+        'Lunar Silk',
+        'Celestial Rose',
+        'Lunar Bloom',
+        'Blossom Ray',
+        'Aurora Bloom',
+        'Stellar Velvet',
+        'Rose Nebula',
+        'Solar Bloom',
+        'Stellar Bloom',
+        'Fire Blossom',
+        'Flora Nova',
+        'Astral Wonder',
+        'Golden Stardust',
+        'Velvet Cosmos'
+    ],
+    'oriental-spicy': [
+        'Ember Pulse',
+        'Volcanic Crown',
+        'Nightforge',
+        'Ember Noir',
+        'Solar Noir',
+        'Midnight Aura',
+        'Amber Radiance',
+        'Nightfall Ember'
+    ],
+    'woody-citrus-aromatic': [
+        'Helios Peak',
+        'Solar Prism',
+        'Serpent Star',
+        'Cosmic Noir',
+        'Aegean Surge',
+        'Ember Strike',
+        'Mystic Oud',
+        'Solar Apex'
+    ],
+    'fresh-marine-green': [
+        'Frost Zenith',
+        'Tidal Origin',
+        'Azure Pulse',
+        'Radiant Eclipse',
+        'Oceanic Halo',
+        'Cloud Meadow',
+        'Aegean Surge',
+        'Solstice Aura'
     ]
 };
 
