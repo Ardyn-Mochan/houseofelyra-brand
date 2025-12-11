@@ -922,10 +922,130 @@ export const products = [
     }
 ];
 
-export const getProductBySlug = (slug) => products.find(p => p.slug === slug);
-export const getProductById = (id) => products.find(p => p.id === parseInt(id));
+// ==========================================
+// MASTER CLASSIFICATION MAPPINGS
+// Based on comprehensive perfume classification table
+// ==========================================
+
+const GENDER_CLASSIFICATION = {
+    Feminine: [
+        'Lunar Silk', 'Starlit Femme', 'Celestial Rose', 'Lunar Bloom',
+        'Blossom Ray', 'Midnight Petal', 'Aurora Bloom', 'Stellar Velvet',
+        'Rose Nebula', 'Midnight Aura', 'Petal Sphere', 'Cloud Meadow', 'Iris Halo',
+        'Fire Blossom', 'Nightfall Rose', 'Flora Nova', 'Solar Bloom', 'Crystal Dawn',
+        'Stellar Bloom', 'Astral Wonder', 'Golden Stardust', 'Velvet Cosmos', 'Ancient Ember'
+    ],
+    Masculine: [
+        'Helios Peak', 'Frost Zenith', 'Ember Pulse', 'Eternal Ember', 'Shadow Rift',
+        'Solar Prism', 'Volcanic Crown', 'Nightforge', 'Tidal Origin', 'Cosmic Noir',
+        'Aegean Surge', 'Azure Pulse', 'Ember Royale', 'Serpent Star', 'Starborn Drift',
+        'Radiant Eclipse', 'Ember Strike', 'Nightfall Ember', 'Solar Apex', 'Aegean Star',
+        'Ember Noir', 'Solar Noir'
+    ],
+    Unisex: [
+        'Nebula Gold', 'Solstice Aura', 'Aether Santal', 'Oceanic Halo', 'Mystic Oud',
+        'Amber Radiance'
+    ]
+};
+
+const OCCASION_CLASSIFICATION = {
+    Daytime: [
+        'Solstice Aura', 'Frost Zenith', 'Aegean Star', 'Azure Pulse', 'Cloud Meadow',
+        'Blossom Ray', 'Aurora Bloom', 'Stellar Velvet', 'Solar Prism', 'Oceanic Halo',
+        'Velvet Cosmos', 'Crystal Dawn', 'Stellar Bloom', 'Petal Sphere', 'Flora Nova'
+    ],
+    Evening: [
+        'Nebula Gold', 'Lunar Silk', 'Ember Pulse', 'Eternal Ember', 'Shadow Rift',
+        'Nightforge', 'Solar Noir', 'Ember Noir', 'Ember Royale', 'Midnight Aura',
+        'Mystic Oud', 'Nightfall Ember', 'Ancient Ember', 'Amber Radiance', 'Nightfall Rose'
+    ],
+    'Special Occasions': [
+        'Nebula Gold', 'Eternal Ember', 'Shadow Rift', 'Volcanic Crown', 'Solar Noir',
+        'Mystic Oud', 'Crystal Dawn', 'Golden Stardust', 'Astral Wonder', 'Fire Blossom',
+        'Solar Apex'
+    ],
+    'Date Night': [
+        'Ember Pulse', 'Ember Noir', 'Solar Noir', 'Rose Nebula', 'Velvet Cosmos',
+        'Midnight Aura', 'Lunar Silk', 'Celestial Rose', 'Astral Wonder', 'Golden Stardust',
+        'Nightfall Rose', 'Fire Blossom'
+    ]
+};
+
+const SEASON_CLASSIFICATION = {
+    Spring: [
+        'Blossom Ray', 'Aurora Bloom', 'Stellar Velvet', 'Aegean Star', 'Cloud Meadow',
+        'Flora Nova', 'Petal Sphere', 'Stellar Bloom', 'Iris Halo'
+    ],
+    Summer: [
+        'Solstice Aura', 'Frost Zenith', 'Aegean Surge', 'Azure Pulse', 'Radiant Eclipse',
+        'Solar Prism', 'Oceanic Halo', 'Solar Apex', 'Starborn Drift', 'Tidal Origin',
+        'Aegean Star', 'Blossom Ray'
+    ],
+    Fall: [
+        'Lunar Silk', 'Ember Pulse', 'Eternal Ember', 'Volcanic Crown', 'Ember Royale',
+        'Mystic Oud', 'Crystal Dawn', 'Stellar Bloom', 'Velvet Cosmos', 'Helios Peak',
+        'Midnight Petal', 'Nightfall Rose'
+    ],
+    Winter: [
+        'Nebula Gold', 'Shadow Rift', 'Ember Noir', 'Solar Noir', 'Nightforge',
+        'Amber Radiance', 'Nightfall Ember', 'Ancient Ember', 'Golden Stardust',
+        'Midnight Aura', 'Starlit Femme', 'Fire Blossom'
+    ]
+};
+
+// Apply master classification to products
+const applyMasterClassification = (productsList) => {
+    return productsList.map(product => {
+        const productName = product.name;
+
+        // Determine gender
+        let gender = product.gender; // Keep existing as fallback
+        if (GENDER_CLASSIFICATION.Feminine.includes(productName)) {
+            gender = 'Feminine';
+        } else if (GENDER_CLASSIFICATION.Masculine.includes(productName)) {
+            gender = 'Masculine';
+        } else if (GENDER_CLASSIFICATION.Unisex.includes(productName)) {
+            gender = 'Unisex';
+        }
+
+        // Determine occasions
+        const occasions = [];
+        if (OCCASION_CLASSIFICATION.Daytime.includes(productName)) occasions.push('Daytime');
+        if (OCCASION_CLASSIFICATION.Evening.includes(productName)) occasions.push('Evening');
+        if (OCCASION_CLASSIFICATION['Special Occasions'].includes(productName)) occasions.push('Special Occasions');
+        if (OCCASION_CLASSIFICATION['Date Night'].includes(productName)) occasions.push('Date Night');
+        // Keep existing occasions if not in master list
+        const occasion = occasions.length > 0 ? occasions : product.occasion;
+
+        // Determine seasons
+        const seasons = [];
+        if (SEASON_CLASSIFICATION.Spring.includes(productName)) seasons.push('Spring');
+        if (SEASON_CLASSIFICATION.Summer.includes(productName)) seasons.push('Summer');
+        if (SEASON_CLASSIFICATION.Fall.includes(productName)) seasons.push('Fall');
+        if (SEASON_CLASSIFICATION.Winter.includes(productName)) seasons.push('Winter');
+        // Keep existing seasons if not in master list, or use All Seasons
+        const season = seasons.length > 0 ? seasons : product.season;
+
+        return {
+            ...product,
+            gender,
+            occasion,
+            season
+        };
+    });
+};
+
+// Apply classifications and export
+const classifiedProducts = applyMasterClassification(products);
+
+export { classifiedProducts as products };
+export const getProductBySlug = (slug) => classifiedProducts.find(p => p.slug === slug);
+export const getProductById = (id) => classifiedProducts.find(p => p.id === parseInt(id));
 export const getSimilarProducts = (product, limit = 4) => {
-    return products
+    return classifiedProducts
         .filter(p => p.id !== product.id && p.scentFamily.includes(product.scentFamily.split('–')[0]))
         .slice(0, limit);
 };
+
+// Export classifications for use in filters
+export { GENDER_CLASSIFICATION, OCCASION_CLASSIFICATION, SEASON_CLASSIFICATION };
