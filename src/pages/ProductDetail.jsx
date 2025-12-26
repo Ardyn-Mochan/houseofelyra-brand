@@ -165,7 +165,7 @@ const ProductDetail = () => {
                                         ${product.price}
                                     </p>
                                     <p className="text-sm text-elyra-cream/40 mb-2 font-light">
-                                        50ml / 1.7oz Extrait de Parfum
+                                        30ml / 1.01oz Extrait de Parfum
                                     </p>
                                 </div>
 
