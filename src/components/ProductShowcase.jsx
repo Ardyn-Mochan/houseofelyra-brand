@@ -529,7 +529,7 @@ const ProductShowcase = () => {
     }, [scrollDirection]);
 
     return (
-        <section ref={containerRef} className="py-32 bg-elyra-cream-light relative overflow-hidden">
+        <section ref={containerRef} className="py-32 bg-gradient-to-b from-[#1a1816] to-[#141210] relative overflow-hidden">
             <div className="container mx-auto px-8 mb-20 flex justify-between items-end">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -537,10 +537,10 @@ const ProductShowcase = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h2 className="text-5xl md:text-7xl font-cinzel text-elyra-soft-brown mb-6">
+                    <h2 className="text-5xl md:text-7xl font-cinzel text-elyra-cream mb-6">
                         Signature <span className="italic text-elyra-soft-gold">Collection</span>
                     </h2>
-                    <p className="font-cormorant text-elyra-earth/80 max-w-xl text-xl md:text-2xl font-light leading-relaxed">
+                    <p className="font-cormorant text-elyra-cream/70 max-w-xl text-xl md:text-2xl font-light leading-relaxed">
                         Discover our curated selection of premium fragrances, each crafted to evoke a unique emotion and memory.
                     </p>
                     <div className="w-32 h-[2px] bg-gradient-to-r from-elyra-soft-gold to-transparent mt-8"></div>
@@ -550,20 +550,20 @@ const ProductShowcase = () => {
             <div className="relative w-full group">
                 {/* Left Hover Zone */}
                 <div
-                    className="absolute top-0 left-0 w-24 md:w-32 h-full z-20 cursor-w-resize flex items-center justify-start pl-4 bg-gradient-to-r from-elyra-cream-light/90 via-elyra-cream-light/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute top-0 left-0 w-24 md:w-32 h-full z-20 cursor-w-resize flex items-center justify-start pl-4 bg-gradient-to-r from-[#1a1816]/90 via-[#1a1816]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     onMouseEnter={() => setScrollDirection('left')}
                     onMouseLeave={() => setScrollDirection(null)}
                 >
-                    <ChevronLeft className="text-elyra-soft-brown/80 drop-shadow-lg" size={40} strokeWidth={1} />
+                    <ChevronLeft className="text-elyra-cream/80 drop-shadow-lg" size={40} strokeWidth={1} />
                 </div>
 
                 {/* Right Hover Zone */}
                 <div
-                    className="absolute top-0 right-0 w-24 md:w-32 h-full z-20 cursor-e-resize flex items-center justify-end pr-4 bg-gradient-to-l from-elyra-cream-light/90 via-elyra-cream-light/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute top-0 right-0 w-24 md:w-32 h-full z-20 cursor-e-resize flex items-center justify-end pr-4 bg-gradient-to-l from-[#1a1816]/90 via-[#1a1816]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     onMouseEnter={() => setScrollDirection('right')}
                     onMouseLeave={() => setScrollDirection(null)}
                 >
-                    <ChevronRight className="text-elyra-soft-brown/80 drop-shadow-lg" size={40} strokeWidth={1} />
+                    <ChevronRight className="text-elyra-cream/80 drop-shadow-lg" size={40} strokeWidth={1} />
                 </div>
 
                 <div
@@ -655,7 +655,7 @@ const ProductShowcase = () => {
             </div>
 
             {/* Decorative Element */}
-            <div className="absolute top-1/2 right-0 w-96 h-96 bg-elyra-soft-gold/10 blur-3xl rounded-full pointer-events-none" />
+            <div className="absolute top-1/2 right-0 w-96 h-96 bg-elyra-soft-gold/5 blur-3xl rounded-full pointer-events-none" />
         </section>
     );
 };

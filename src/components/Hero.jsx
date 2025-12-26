@@ -76,68 +76,112 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.8, delay: 0.4, ease: [0.19, 1, 0.22, 1] }}
-                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-cinzel mb-8 leading-tight tracking-wide"
+                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-cinzel mb-6 leading-tight tracking-wide"
                     style={{
                         color: '#ffffff',
                         fontWeight: 300,
                         letterSpacing: '0.05em',
-                        // Optimized glow: fewer layers, similar visual impact
                         textShadow: `
                             0 0 20px rgba(255, 255, 255, 0.8),
                             0 0 40px rgba(255, 255, 255, 0.6),
                             0 0 80px rgba(255, 255, 255, 0.4)
                         `,
-                        willChange: 'transform' // Hint to browser to promote to layer
+                        willChange: 'transform'
                     }}
                 >
                     YOUR AURA, PERFECTED.
                 </motion.h1>
 
-                <Link to="/shop">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.6, delay: 1.0, ease: [0.19, 1, 0.22, 1] }}
-                        className="flex items-center gap-3 group cursor-pointer"
-                    >
-                        <p
-                            className="text-sm md:text-base font-light"
+                {/* Tagline */}
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.6, delay: 0.8, ease: [0.19, 1, 0.22, 1] }}
+                    className="text-base md:text-lg font-cormorant font-light mb-10 max-w-md"
+                    style={{
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        letterSpacing: '0.02em',
+                        textShadow: '0 0 30px rgba(0, 0, 0, 0.5)'
+                    }}
+                >
+                    Luxury-inspired fragrances crafted for those who leave an impression.
+                </motion.p>
+
+                {/* CTA Buttons */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.6, delay: 1.0, ease: [0.19, 1, 0.22, 1] }}
+                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                >
+                    {/* Primary CTA Button */}
+                    <Link to="/shop">
+                        <motion.button
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="relative px-8 py-4 text-sm uppercase tracking-[0.2em] font-medium overflow-hidden group"
                             style={{
-                                color: '#ffffff',
-                                fontWeight: 200,
-                                letterSpacing: '0.03em',
-                                textShadow: `
-                                    0 0 20px rgba(255, 255, 255, 0.6),
-                                    0 0 40px rgba(255, 255, 255, 0.3)
-                                `
+                                background: 'linear-gradient(135deg, #D4C4A8 0%, #B8A888 50%, #D4C4A8 100%)',
+                                color: '#1a1816',
+                                boxShadow: '0 4px 30px rgba(212, 196, 168, 0.4), 0 0 60px rgba(212, 196, 168, 0.2)'
                             }}
                         >
-                            Discover your soul's signature.
-                        </p>
+                            <span className="relative z-10">Explore Collection</span>
+                            {/* Shimmer effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+                        </motion.button>
+                    </Link>
+
+                    {/* Secondary CTA */}
+                    <Link to="/discover" className="group flex items-center gap-2">
+                        <span
+                            className="text-sm uppercase tracking-[0.15em] font-light border-b border-white/40 pb-1 group-hover:border-white transition-colors duration-300"
+                            style={{
+                                color: '#ffffff',
+                                textShadow: '0 0 20px rgba(255, 255, 255, 0.5)'
+                            }}
+                        >
+                            Find Your Scent
+                        </span>
                         <motion.svg
-                            width="20"
-                            height="20"
+                            width="16"
+                            height="16"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="1.5"
-                            className="transform group-hover:translate-x-1 transition-transform duration-700 ease-out"
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1.4, delay: 1.4, ease: [0.19, 1, 0.22, 1] }}
-                            style={{
-                                color: '#ffffff',
-                                filter: `
-                                    drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
-                                    drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
-                                    drop-shadow(0 0 15px rgba(255, 255, 255, 0.5))
-                                `
-                            }}
+                            className="text-white transform group-hover:translate-x-1 transition-transform duration-300"
                         >
                             <path d="M5 12h14M12 5l7 7-7 7" />
                         </motion.svg>
-                    </motion.div>
-                </Link>
+                    </Link>
+                </motion.div>
+            </motion.div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2, duration: 1 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+            >
+                <span className="text-[10px] uppercase tracking-[0.3em] text-white/60">Scroll</span>
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        className="text-white/60"
+                    >
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </motion.div>
             </motion.div>
         </section>
     );
