@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const Story = () => {
-    const { scrollY } = useScroll();
-    const imageY = useTransform(scrollY, [0, 1000], [0, -100]);
+    const sectionRef = useRef(null);
+
+    // Track scroll progress relative to this section
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"] // From when section enters to when it leaves
+    });
+
+    // Parallax transforms - image moves slower than scroll
+    const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+    const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.05, 1]);
+    const decorativeY = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
+    const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.4, 0.5]);
 
     return (
-        <section className="min-h-screen py-20 relative overflow-hidden flex items-center">
-            {/* Full-width Image Background */}
+        <section ref={sectionRef} className="min-h-screen py-20 relative overflow-hidden flex items-center">
+            {/* Full-width Image Background with Parallax */}
             <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 w-full h-full z-0"
+                style={{ y: imageY, scale: imageScale }}
             >
                 <div className="relative w-full h-full">
                     <img
@@ -22,15 +34,22 @@ const Story = () => {
                         alt="Elyra Perfume Bottle"
                         className="w-full h-full object-cover object-center"
                     />
-                    {/* Subtle Overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-elyra-cream/90 via-elyra-cream/40 to-transparent" />
+                    {/* Dynamic Overlay for text readability */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-elyra-cream via-elyra-cream/60 to-transparent"
+                        style={{ opacity: overlayOpacity }}
+                    />
                 </div>
             </motion.div>
 
-            {/* Decorative Background Element */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none z-[1]">
+            {/* Decorative Background Element with Counter-Parallax */}
+            <motion.div
+                className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none z-[1]"
+                style={{ y: decorativeY }}
+            >
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-elyra-soft-gold/10 blur-3xl rounded-full" />
-            </div>
+                <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-elyra-taupe/10 blur-3xl rounded-full" />
+            </motion.div>
 
             <div className="container mx-auto px-6 md:px-12 lg:px-8 relative z-10 w-full">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-20">

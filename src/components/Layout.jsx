@@ -16,6 +16,16 @@ const Layout = ({ children }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    // Track scroll position for nav background
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         if (searchParams.get('success')) {
@@ -76,7 +86,10 @@ const Layout = ({ children }) => {
 
     return (
         <div className="min-h-screen bg-elyra-cream-light text-elyra-earth selection:bg-elyra-taupe selection:text-elyra-cream">
-            <header className="fixed top-0 left-0 w-full z-50 py-6 px-8 flex justify-between items-center">
+            <header className={`fixed top-0 left-0 w-full z-50 py-4 px-8 flex justify-between items-center transition-all duration-500 ${isScrolled
+                ? 'bg-[#1a1816]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)] border-b border-white/5'
+                : 'bg-transparent'
+                }`}>
                 <div className="flex items-center gap-3 z-50">
                     {/* Mobile Menu Toggle */}
                     <button
@@ -158,36 +171,62 @@ const Layout = ({ children }) => {
                 </div>
             </header>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu Overlay - Enhanced */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-40 bg-[#1a1816] flex flex-col justify-center items-center md:hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="fixed inset-0 z-40 bg-[#1a1816]/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden overflow-hidden"
                     >
-                        <nav className="flex flex-col space-y-8 text-center">
-                            <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
-                                Home
-                            </Link>
-                            <Link to="/shop" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
-                                Shop
-                            </Link>
-                            <Link to="/discover" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
-                                Discover
-                            </Link>
-                            <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
-                                About
-                            </Link>
-                            <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
-                                Journal
-                            </Link>
-                            <Link to="/elyra" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-colors duration-300 tracking-widest">
-                                Elyra
-                            </Link>
+                        {/* Decorative Background Elements */}
+                        <div className="absolute inset-0 pointer-events-none">
+                            <div className="absolute top-1/4 -left-20 w-64 h-64 bg-elyra-soft-gold/10 rounded-full blur-[100px]" />
+                            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-900/20 rounded-full blur-[120px]" />
+                        </div>
+
+                        {/* Menu Links with Staggered Animation */}
+                        <nav className="relative z-10 flex flex-col space-y-6 text-center">
+                            {[
+                                { to: '/', label: 'Home' },
+                                { to: '/shop', label: 'Shop' },
+                                { to: '/discover', label: 'Discover' },
+                                { to: '/about', label: 'About' },
+                                { to: '/blog', label: 'Journal' },
+                                { to: '/elyra', label: 'Elyra' }
+                            ].map((link, index) => (
+                                <motion.div
+                                    key={link.to}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{
+                                        delay: index * 0.08,
+                                        duration: 0.5,
+                                        ease: [0.22, 1, 0.36, 1]
+                                    }}
+                                >
+                                    <Link
+                                        to={link.to}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="block text-3xl font-cinzel text-elyra-cream hover:text-elyra-soft-gold transition-all duration-300 tracking-[0.2em] py-2"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </motion.div>
+                            ))}
                         </nav>
+
+                        {/* Bottom Decorative Line */}
+                        <motion.div
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            exit={{ scaleX: 0 }}
+                            transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                            className="absolute bottom-20 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-gradient-to-r from-transparent via-elyra-soft-gold to-transparent"
+                        />
                     </motion.div>
                 )}
             </AnimatePresence>

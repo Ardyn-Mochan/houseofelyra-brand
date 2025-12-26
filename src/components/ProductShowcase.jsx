@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
@@ -466,196 +465,187 @@ const products = [
     }
 ];
 
-const ProductShowcase = () => {
-    const containerRef = useRef(null);
-    const scrollContainerRef = useRef(null);
-    const [scrollDirection, setScrollDirection] = useState(null);
-    const { addToCart } = useCart();
-    const navigate = useNavigate();
+// Split products into 3 rows of 17 each
+const row1Products = products.slice(0, 17);
+const row2Products = products.slice(17, 34);
+const row3Products = products.slice(34, 51);
 
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    });
+// Product Card Component - Responsive for mobile
+const ProductCard = ({ product, index, navigate, addToCart, isMobile }) => (
+    <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1, duration: 0.6 }}
+        onClick={() => navigate(`/product/${product.name.toLowerCase().replace(/ /g, '-')}`)}
+        className={`group relative bg-[#1a1816] rounded-lg flex flex-col justify-end overflow-hidden transition-all duration-700 hover:shadow-[0_0_60px_rgba(212,196,168,0.15)] cursor-pointer flex-shrink-0 ${isMobile ? 'w-[200px] h-[280px]' : 'w-[280px] h-[380px]'
+            }`}
+    >
+        {/* Product Image */}
+        {product.image ? (
+            <div className="absolute inset-0">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute inset-0 pointer-events-none" style={{
+                    boxShadow: 'inset 0 0 30px 15px rgba(26, 24, 22, 0.8), inset 0 0 60px 30px rgba(26, 24, 22, 0.4)'
+                }} />
+            </div>
+        ) : (
+            <>
+                <div className={`absolute top-0 left-0 w-full h-full opacity-15 bg-gradient-to-br ${product.color} group-hover:opacity-25 transition-all duration-700`} />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    <div className={`absolute top-1/4 left-1/2 -translate-x-1/2 w-3/4 h-3/4 bg-gradient-to-br ${product.color} blur-3xl opacity-20`} />
+                </div>
+            </>
+        )}
 
-    // Parallax effect (subtle -5% to work with infinite scroll width)
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
+        {/* Product Number */}
+        <div className={`absolute top-3 right-3 font-cinzel text-elyra-soft-gold/15 group-hover:text-elyra-soft-gold/30 transition-colors duration-700 leading-none ${isMobile ? 'text-2xl' : 'text-4xl'
+            }`}>
+            {String(index + 1).padStart(2, '0')}
+        </div>
 
-    // Triple the products to create an infinite loop buffer
+        {/* Product Details */}
+        <div className={`absolute left-3 right-3 z-10 transform translate-y-0 group-hover:-translate-y-1 transition-transform duration-700 ${isMobile ? 'bottom-3' : 'bottom-4'
+            }`}>
+            <h3 className={`font-cinzel tracking-wide text-white ${isMobile ? 'text-base' : 'text-xl'
+                }`} style={{ textShadow: '0 0 40px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.8)' }}>
+                {product.name}
+            </h3>
+
+            <div className="flex items-center justify-between gap-2 mt-1">
+                <p className={`font-light leading-tight text-white/90 ${isMobile ? 'text-[9px]' : 'text-[11px]'
+                    }`} style={{ textShadow: '0 0 30px rgba(0,0,0,1)' }}>
+                    {product.description}
+                </p>
+
+                {/* Always show cart button on mobile (no hover) */}
+                <button
+                    onClick={(e) => { e.stopPropagation(); addToCart(product); }}
+                    className={`flex flex-col items-center justify-center gap-0.5 transition-all duration-500 hover:scale-110 flex-shrink-0 ${isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                        }`}
+                >
+                    <svg width={isMobile ? 14 : 16} height={isMobile ? 14 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-white">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span className="text-[8px] font-medium text-white" style={{ textShadow: '0 0 20px rgba(0,0,0,0.8)' }}>
+                        {product.price}
+                    </span>
+                </button>
+            </div>
+
+            {/* Hide scent on mobile for cleaner cards */}
+            {!isMobile && product.scent && (
+                <p className="font-light italic text-[9px] text-white/70 mt-1" style={{ textShadow: '0 0 30px rgba(0,0,0,1)' }}>
+                    {product.scent}
+                </p>
+            )}
+        </div>
+    </motion.div>
+);
+
+// Infinite Scrolling Row Component - Mobile Optimized
+const InfiniteRow = ({ products, direction = 'left', speed = 30, rowIndex, isMobile }) => {
+    // Triple the products for seamless looping
     const extendedProducts = [...products, ...products, ...products];
+    const navigate = useNavigate();
+    const { addToCart } = useCart();
 
-    useEffect(() => {
-        // Set initial scroll position to the middle set
-        if (scrollContainerRef.current) {
-            const scrollWidth = scrollContainerRef.current.scrollWidth;
-            const singleSetWidth = scrollWidth / 3;
-            scrollContainerRef.current.scrollLeft = singleSetWidth;
-        }
-    }, []);
-
-    useEffect(() => {
-        let animationFrame;
-        const scrollSpeed = 8; // Adjust speed as needed
-
-        const animateScroll = () => {
-            if (scrollContainerRef.current) {
-                const container = scrollContainerRef.current;
-
-                // Apply scroll based on direction
-                if (scrollDirection) {
-                    container.scrollLeft += scrollDirection === 'right' ? scrollSpeed : -scrollSpeed;
-                }
-
-                // Infinite Scroll Logic (Seamless Looping)
-                const scrollWidth = container.scrollWidth;
-                const singleSetWidth = scrollWidth / 3;
-
-                // If scrolled past the second set (towards right end), jump back to start of second set
-                if (container.scrollLeft >= 2 * singleSetWidth) {
-                    container.scrollLeft = singleSetWidth;
-                }
-                // If scrolled past the first set (towards left start), jump forward to start of second set
-                else if (container.scrollLeft <= 0) {
-                    container.scrollLeft = singleSetWidth;
-                }
-
-                animationFrame = requestAnimationFrame(animateScroll);
-            }
-        };
-
-        animationFrame = requestAnimationFrame(animateScroll);
-
-        return () => cancelAnimationFrame(animationFrame);
-    }, [scrollDirection]);
+    // Faster speed on mobile for better visibility of more products
+    const adjustedSpeed = isMobile ? speed * 0.6 : speed;
 
     return (
-        <section ref={containerRef} className="py-32 bg-gradient-to-b from-[#1a1816] to-[#141210] relative overflow-hidden">
-            <div className="container mx-auto px-8 mb-20 flex justify-between items-end">
+        <div className="relative w-full overflow-hidden py-2 md:py-3">
+            {/* Gradient fade edges - smaller on mobile */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[#1a1816] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[#1a1816] to-transparent z-10 pointer-events-none" />
+
+            <motion.div
+                className="flex gap-3 md:gap-5"
+                animate={{
+                    x: direction === 'left' ? ['0%', '-33.333%'] : ['-33.333%', '0%']
+                }}
+                transition={{
+                    x: {
+                        duration: adjustedSpeed,
+                        repeat: Infinity,
+                        ease: 'linear',
+                        repeatType: 'loop'
+                    }
+                }}
+                style={{ width: 'fit-content' }}
+            >
+                {extendedProducts.map((product, index) => (
+                    <ProductCard
+                        key={`row${rowIndex}-${product.id}-${index}`}
+                        product={product}
+                        index={(index % products.length) + 1 + (rowIndex * 17)}
+                        navigate={navigate}
+                        addToCart={addToCart}
+                        isMobile={isMobile}
+                    />
+                ))}
+            </motion.div>
+        </div>
+    );
+};
+
+const ProductShowcase = () => {
+    const containerRef = useRef(null);
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    // Detect mobile viewport
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    return (
+        <section ref={containerRef} className="py-16 md:py-24 bg-gradient-to-b from-[#1a1816] to-[#141210] relative overflow-hidden">
+            {/* Header */}
+            <div className="container mx-auto px-4 md:px-8 mb-8 md:mb-16">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
+                    className="text-center"
                 >
-                    <h2 className="text-5xl md:text-7xl font-cinzel text-elyra-cream mb-6">
+                    <h2 className="text-3xl md:text-5xl lg:text-7xl font-cinzel text-elyra-cream mb-4 md:mb-6">
                         Signature <span className="italic text-elyra-soft-gold">Collection</span>
                     </h2>
-                    <p className="font-cormorant text-elyra-cream/70 max-w-xl text-xl md:text-2xl font-light leading-relaxed">
+                    <p className="font-cormorant text-elyra-cream/70 max-w-2xl mx-auto text-base md:text-xl lg:text-2xl font-light leading-relaxed px-4">
                         Discover our curated selection of premium fragrances, each crafted to evoke a unique emotion and memory.
                     </p>
-                    <div className="w-32 h-[2px] bg-gradient-to-r from-elyra-soft-gold to-transparent mt-8"></div>
+                    <div className="w-24 md:w-32 h-[2px] bg-gradient-to-r from-transparent via-elyra-soft-gold to-transparent mt-6 md:mt-8 mx-auto" />
                 </motion.div>
             </div>
 
-            <div className="relative w-full group">
-                {/* Left Hover Zone */}
-                <div
-                    className="absolute top-0 left-0 w-24 md:w-32 h-full z-20 cursor-w-resize flex items-center justify-start pl-4 bg-gradient-to-r from-[#1a1816]/90 via-[#1a1816]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    onMouseEnter={() => setScrollDirection('left')}
-                    onMouseLeave={() => setScrollDirection(null)}
-                >
-                    <ChevronLeft className="text-elyra-cream/80 drop-shadow-lg" size={40} strokeWidth={1} />
-                </div>
+            {/* Rows - Show 2 on mobile, 3 on desktop */}
+            <div className="space-y-2 md:space-y-4">
+                {/* Row 1 - Left */}
+                <InfiniteRow products={row1Products} direction="left" speed={60} rowIndex={0} isMobile={isMobile} />
 
-                {/* Right Hover Zone */}
-                <div
-                    className="absolute top-0 right-0 w-24 md:w-32 h-full z-20 cursor-e-resize flex items-center justify-end pr-4 bg-gradient-to-l from-[#1a1816]/90 via-[#1a1816]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    onMouseEnter={() => setScrollDirection('right')}
-                    onMouseLeave={() => setScrollDirection(null)}
-                >
-                    <ChevronRight className="text-elyra-cream/80 drop-shadow-lg" size={40} strokeWidth={1} />
-                </div>
+                {/* Row 2 - Right (opposite direction) */}
+                <InfiniteRow products={row2Products} direction="right" speed={55} rowIndex={1} isMobile={isMobile} />
 
-                <div
-                    ref={scrollContainerRef}
-                    className="relative w-full overflow-x-auto hide-scrollbar pl-8 md:pl-0"
-                >
-                    <motion.div
-                        className="flex space-x-6 md:space-x-8 px-8 min-w-max"
-                        style={{ x }}
-                    >
-                        {extendedProducts.map((product, index) => (
-                            <motion.div
-                                key={`${product.id}-${index}`}
-                                initial={{ opacity: 0, y: 60 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: (index % products.length) * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                                onClick={() => navigate(`/product/${product.name.toLowerCase().replace(/ /g, '-')}`)}
-                                className={`group relative w-[300px] md:w-[380px] h-[520px] bg-elyra-ivory border border-elyra-taupe/20 flex flex-col justify-end overflow-hidden transition-all duration-700 hover:border-elyra-soft-gold/40 hover:shadow-[0_0_40px_rgba(212,196,168,0.15)] hover:backdrop-blur-sm cursor-pointer ${product.image ? 'p-6' : 'p-8'}`}
-                            >
-                                {/* Product Image (if exists) */}
-                                {product.image ? (
-                                    <div className="absolute inset-0">
-                                        <img
-                                            src={product.image}
-                                            alt={product.name}
-                                            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-700 group-hover:blur-[3px]"
-                                        />
-                                        {/* Dark overlay for text visibility */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                                    </div>
-                                ) : (
-                                    <>
-                                        {/* Abstract Bottle Gradient */}
-                                        <div className={`absolute top-0 left-0 w-full h-full opacity-15 bg-gradient-to-br ${product.color} group-hover:opacity-25 transition-all duration-700 group-hover:blur-[2px]`} />
-
-                                        {/* Glow Effect */}
-                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                                            <div className={`absolute top-1/4 left-1/2 -translate-x-1/2 w-3/4 h-3/4 bg-gradient-to-br ${product.color} blur-3xl opacity-20`} />
-                                        </div>
-                                    </>
-                                )}
-
-                                {/* Product Number - Top Right */}
-                                <div className="absolute top-6 right-6 text-5xl md:text-6xl font-cinzel text-elyra-soft-gold/15 group-hover:text-elyra-soft-gold/25 transition-colors duration-700 leading-none">
-                                    {String((index % products.length) + 1).padStart(2, '0')}
-                                </div>
-
-                                {/* Product Details - Bottom */}
-                                <div className="absolute bottom-6 left-6 right-6 z-10 transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-700 space-y-0">
-                                    <h3 className={`font-cinzel tracking-wide ${product.image ? 'text-2xl text-white !text-white' : 'text-3xl text-elyra-soft-brown'}`} style={product.image ? { color: '#ffffff', textShadow: '0 0 40px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.9), 0 4px 8px rgba(0,0,0,0.8)' } : {}}>{product.name}</h3>
-
-                                    {/* Description and Cart/Price on same line */}
-                                    <div className="flex items-center justify-between gap-4">
-                                        <p className={`font-light leading-tight ${product.image ? 'text-xs text-white !text-white' : 'text-sm text-elyra-earth/70'}`} style={product.image ? { color: '#ffffff', textShadow: '0 0 35px rgba(0,0,0,1), 0 0 25px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)' } : {}}>{product.description}</p>
-
-                                        {/* Shopping Bag Icon with Price */}
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); addToCart(product); }}
-                                            className="flex flex-col items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-500 hover:scale-110 flex-shrink-0"
-                                        >
-                                            <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="1.5"
-                                                className={`${product.image ? 'text-white' : 'text-elyra-soft-brown'} flex-shrink-0`}
-                                            >
-                                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                                                <line x1="3" y1="6" x2="21" y2="6" />
-                                                <path d="M16 10a4 4 0 0 1-8 0" />
-                                            </svg>
-                                            <span className={`text-[8px] font-medium leading-none ${product.image ? 'text-white' : 'text-elyra-soft-brown'}`} style={product.image ? { textShadow: '0 0 20px rgba(0,0,0,0.8)' } : {}}>
-                                                {product.price}
-                                            </span>
-                                        </button>
-                                    </div>
-
-                                    {product.scent && (
-                                        <p className={`font-light italic leading-tight ${product.image ? 'text-[10px] text-white !text-white' : 'text-xs text-elyra-earth/60'}`} style={product.image ? { color: '#ffffff', textShadow: '0 0 35px rgba(0,0,0,1), 0 0 25px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.9), 0 3px 6px rgba(0,0,0,0.8)' } : {}}>{product.scent}</p>
-                                    )}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
+                {/* Row 3 - Left (hidden on small mobile, shown on larger screens) */}
+                <div className="hidden sm:block">
+                    <InfiniteRow products={row3Products} direction="left" speed={65} rowIndex={2} isMobile={isMobile} />
                 </div>
             </div>
 
-            {/* Decorative Element */}
-            <div className="absolute top-1/2 right-0 w-96 h-96 bg-elyra-soft-gold/5 blur-3xl rounded-full pointer-events-none" />
+            {/* Decorative Elements - smaller on mobile */}
+            <div className="absolute top-1/4 left-0 w-48 md:w-72 h-48 md:h-72 bg-elyra-soft-gold/5 blur-3xl rounded-full pointer-events-none" />
+            <div className="absolute bottom-1/4 right-0 w-64 md:w-96 h-64 md:h-96 bg-elyra-soft-gold/5 blur-3xl rounded-full pointer-events-none" />
         </section>
     );
 };

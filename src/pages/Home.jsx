@@ -9,12 +9,24 @@ import ProductShowcase from '../components/ProductShowcase';
 const Home = () => {
     return (
         <>
-            <Hero />
-            <Testimonials />
-            <Story />
-            <FeaturedProduct />
-            <ValueProps />
-            <ProductShowcase />
+            <section className="snap-section min-h-screen">
+                <Hero />
+            </section>
+            <section className="snap-section">
+                <Testimonials />
+            </section>
+            <section className="snap-section">
+                <Story />
+            </section>
+            <section className="snap-section">
+                <FeaturedProduct />
+            </section>
+            <section className="snap-section">
+                <ValueProps />
+            </section>
+            <section className="snap-section">
+                <ProductShowcase />
+            </section>
         </>
     );
 };

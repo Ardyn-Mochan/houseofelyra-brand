@@ -85,6 +85,29 @@ h6 {
   display: none;
 }
 
+/* Smooth Scroll with Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Smooth Scrolling - No Snap */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Article Content Styling */
 .article-content h1,
 .article-content h2,
@@ -99,10 +122,21 @@ h6 {
   letter-spacing: 0.02em;
 }
 
-.article-content h1 { font-size: 2.5rem; }
-.article-content h2 { font-size: 2rem; }
-.article-content h3 { font-size: 1.5rem; }
-.article-content h4 { font-size: 1.25rem; }
+.article-content h1 {
+  font-size: 2.5rem;
+}
+
+.article-content h2 {
+  font-size: 2rem;
+}
+
+.article-content h3 {
+  font-size: 1.5rem;
+}
+
+.article-content h4 {
+  font-size: 1.25rem;
+}
 
 .article-content p {
   margin-bottom: 1.5rem;

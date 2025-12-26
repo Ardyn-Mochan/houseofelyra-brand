@@ -131,8 +131,8 @@ const FeaturedProduct = () => {
                                     {/* Badge */}
                                     <div className="absolute top-4 left-4">
                                         <span className={`px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] font-medium ${index === 0
-                                                ? 'bg-elyra-soft-gold text-[#1a1816]'
-                                                : 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
+                                            ? 'bg-elyra-soft-gold text-[#1a1816]'
+                                            : 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
                                             }`}>
                                             {product.badge}
                                         </span>
@@ -167,8 +167,8 @@ const FeaturedProduct = () => {
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
                                                 className={`p-2.5 transition-all duration-300 ${addedId === product.id
-                                                        ? 'bg-green-900/80 text-white'
-                                                        : 'bg-white/5 text-elyra-cream hover:bg-elyra-soft-gold hover:text-[#1a1816]'
+                                                    ? 'bg-green-900/80 text-white'
+                                                    : 'bg-white/5 text-elyra-cream hover:bg-elyra-soft-gold hover:text-[#1a1816]'
                                                     }`}
                                             >
                                                 {addedId === product.id ? (
