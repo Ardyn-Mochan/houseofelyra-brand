@@ -8,37 +8,37 @@ const ValueProps = () => {
             icon: Droplets,
             title: "30% Oil Concentration",
             description: "Extrait de Parfum purity for long-lasting, skin-hugging scent that evolves beautifully throughout the day.",
-            accent: "from-amber-400 to-amber-600"
+            accent: "from-stone-400 to-stone-600"
         },
         {
             icon: Gift,
             title: "Luxury Presentation",
             description: "Each bottle arrives in elegant packaging, ready to gift or treasure as your own personal indulgence.",
-            accent: "from-rose-400 to-rose-600"
+            accent: "from-stone-400 to-stone-600"
         },
         {
             icon: Truck,
             title: "Free Shipping",
             description: "Complimentary delivery across Canada and the United States on orders above $100 CAD.",
-            accent: "from-cyan-400 to-cyan-600"
+            accent: "from-stone-400 to-stone-600"
         },
         {
             icon: Shield,
             title: "Quality Assured",
             description: "Crafted with premium ingredients and rigorous testing to ensure exceptional fragrance performance.",
-            accent: "from-emerald-400 to-emerald-600"
+            accent: "from-stone-400 to-stone-600"
         },
         {
             icon: Sparkles,
             title: "Designer-Inspired",
             description: "Experience iconic scent profiles reimagined with our signature touch at accessible prices.",
-            accent: "from-purple-400 to-purple-600"
+            accent: "from-stone-400 to-stone-600"
         },
         {
             icon: Heart,
             title: "Satisfaction Promise",
             description: "Your happiness matters. We stand behind every fragrance with our commitment to excellence.",
-            accent: "from-pink-400 to-pink-600"
+            accent: "from-stone-400 to-stone-600"
         }
     ];
 
